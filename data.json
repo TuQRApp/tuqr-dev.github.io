@@ -1,1 +1,11 @@
-{}
+{
+  "2abb35aa-fcbb-441f-aaaf-78d88ac3a584": {
+    "banco": "Banco Santander",
+    "rut": "13.268.177-5",
+    "nombre": "Prueba ScanQR5",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "82828282882",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919"
+  }
+}
