@@ -750,8 +750,9 @@
         iniciarCamara();
         return;
       }
-    }catch(e){
-      document.getElementById('scanErr').textContent = 'Error al verificar. Intenta de nuevo.';
+   }catch(e){
+  console.error('btnUsarQR error:', e);
+  document.getElementById('scanErr').textContent = 'Error al verificar. Intenta de nuevo.';
       document.getElementById('scanErr').style.display = 'block';
       btn.textContent = 'Usar este QR →'; btn.disabled = false;
       return;
