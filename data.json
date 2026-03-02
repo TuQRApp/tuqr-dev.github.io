@@ -52,5 +52,14 @@
     "numeroCuenta": "171008883",
     "correo": "Hajaj@gmail.com",
     "telefono": "979699787"
+  },
+  "132681775_BancoRipley_727722727": {
+    "banco": "Banco Ripley",
+    "rut": "13.268.177-5",
+    "nombre": "Prueba ScanQR 4",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "727722727",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919"
   }
 }
