@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TuQR — Panel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#ff7a18; --accent:#ffd400;
+    --bg:#0f0f0f; --surface:#1a1a1a; --surface2:#222;
+    --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+    --text:#f0f0f0; --muted:#888; --radius:14px;
+    --on:#22c55e; --off:#ef4444; --warn:#f59e0b;
+    --shadow:0 8px 32px rgba(0,0,0,.4);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{
+    min-height:100%; font-family:"Poppins",system-ui,sans-serif;
+    background:var(--bg); color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── Login ── */
+  #loginScreen{
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; padding:24px;
+  }
+  .login-card{
+    width:100%; max-width:360px;
+    background:var(--surface); border:1px solid var(--border2);
+    border-radius:20px; padding:40px 32px;
+    box-shadow:var(--shadow);
+  }
+  .login-logo{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px; font-weight:700; color:var(--primary);
+    letter-spacing:.15em; text-transform:uppercase; margin-bottom:32px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .login-logo::before{
+    content:""; width:8px; height:8px; border-radius:50%;
+    background:var(--primary); box-shadow:0 0 8px var(--primary);
+  }
+  .login-title{ font-size:22px; font-weight:800; margin-bottom:6px; }
+  .login-sub{ font-size:13px; color:var(--muted); margin-bottom:28px; }
+  .login-field{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+  .login-field label{ font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
+  .login-field input{
+    background:var(--surface2); border:1px solid var(--border2);
+    border-radius:10px; padding:12px 14px; font-size:14px;
+    font-family:inherit; color:var(--text); outline:none;
+    transition:border-color .15s;
+  }
+  .login-field input:focus{ border-color:var(--primary); }
+  .login-err{
+    font-size:12px; color:var(--off); font-weight:700;
+    background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.2);
+    border-radius:8px; padding:10px 12px; display:none; margin-bottom:12px;
+  }
+  .login-btn{
+    width:100%; padding:13px; font-size:14px; font-weight:800;
+    font-family:inherit; border:0; border-radius:10px; cursor:pointer;
+    color:#fff; background:var(--primary);
+    box-shadow:0 4px 14px rgba(255,122,24,.3);
+    transition:transform .06s, filter .06s;
+  }
+  .login-btn:active{ transform:translateY(1px); filter:brightness(.95); }
+
+  /* ── Dashboard ── */
+  #dashboard{ display:none; }
+  .topbar{
+    background:var(--surface); border-bottom:1px solid var(--border);
+    padding:14px 24px; display:flex; align-items:center;
+    justify-content:space-between; position:sticky; top:0; z-index:10;
+  }
+  .topbar-brand{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px; font-weight:700; color:var(--primary);
+    letter-spacing:.12em; display:flex; align-items:center; gap:8px;
+  }
+  .topbar-brand::before{
+    content:""; width:7px; height:7px; border-radius:50%;
+    background:var(--primary); box-shadow:0 0 6px var(--primary);
+  }
+  .topbar-meta{ font-size:12px; color:var(--muted); display:flex; align-items:center; gap:16px; }
+  .logout-btn{
+    font-size:12px; font-weight:700; color:var(--muted);
+    background:none; border:1px solid var(--border2);
+    border-radius:6px; padding:5px 10px; cursor:pointer;
+    font-family:inherit; transition:color .15s, border-color .15s;
+  }
+  .logout-btn:hover{ color:var(--text); border-color:var(--muted); }
+
+  .main{ padding:32px 24px; max-width:780px; margin:0 auto; display:flex; flex-direction:column; gap:28px; }
+
+  /* Sección */
+  .section{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+  .section-head{
+    padding:18px 20px 14px; border-bottom:1px solid var(--border);
+    display:flex; align-items:flex-start; gap:12px;
+  }
+  .section-icon{
+    width:34px; height:34px; border-radius:8px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; background:rgba(255,122,24,.12);
+  }
+  .section-info{ flex:1; }
+  .section-title{ font-size:15px; font-weight:800; margin-bottom:2px; }
+  .section-desc{ font-size:12px; color:var(--muted); line-height:1.5; }
+  .section-body{ padding:8px 0; }
+
+  /* Toggle row */
+  .toggle-row{
+    display:flex; align-items:center; padding:14px 20px;
+    border-bottom:1px solid var(--border); gap:14px;
+    transition:background .12s;
+  }
+  .toggle-row:last-child{ border-bottom:none; }
+  .toggle-row:hover{ background:rgba(255,255,255,.02); }
+  .toggle-info{ flex:1; min-width:0; }
+  .toggle-label{ font-size:14px; font-weight:700; margin-bottom:2px; }
+  .toggle-sublabel{ font-size:12px; color:var(--muted); line-height:1.4; }
+  .toggle-badge{
+    font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;
+    letter-spacing:.06em; text-transform:uppercase; flex-shrink:0;
+  }
+  .badge-on{ background:rgba(34,197,94,.15); color:var(--on); border:1px solid rgba(34,197,94,.25); }
+  .badge-off{ background:rgba(239,68,68,.12); color:var(--off); border:1px solid rgba(239,68,68,.2); }
+
+  /* Switch */
+  .switch{ position:relative; width:46px; height:26px; flex-shrink:0; }
+  .switch input{ opacity:0; width:0; height:0; position:absolute; }
+  .switch-track{
+    position:absolute; inset:0; border-radius:999px;
+    background:rgba(255,255,255,.12); cursor:pointer;
+    transition:background .2s;
+  }
+  .switch input:checked + .switch-track{ background:var(--primary); }
+  .switch-thumb{
+    position:absolute; top:3px; left:3px;
+    width:20px; height:20px; border-radius:50%;
+    background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.3);
+    pointer-events:none; transition:transform .2s;
+  }
+  .switch input:checked ~ .switch-thumb{ transform:translateX(20px); }
+
+  /* Input row */
+  .input-row{
+    display:flex; align-items:center; padding:12px 20px;
+    border-bottom:1px solid var(--border); gap:12px;
+  }
+  .input-row:last-child{ border-bottom:none; }
+  .input-row .toggle-info{ flex:1; }
+  .admin-input{
+    background:var(--surface2); border:1px solid var(--border2);
+    border-radius:8px; padding:8px 12px; font-size:13px;
+    font-family:"JetBrains Mono",monospace; color:var(--text);
+    outline:none; width:200px; transition:border-color .15s;
+  }
+  .admin-input:focus{ border-color:var(--primary); }
+
+  /* Stats */
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--border);
+  }
+  .stat-cell{
+    background:var(--surface); padding:20px 16px; text-align:center;
+  }
+  .stat-num{ font-size:28px; font-weight:800; color:var(--primary); line-height:1; margin-bottom:4px; }
+  .stat-label{ font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
+
+  /* Save bar */
+  .save-bar{
+    position:fixed; bottom:0; left:0; right:0; z-index:20;
+    background:var(--surface); border-top:1px solid var(--border2);
+    padding:14px 24px; display:flex; align-items:center;
+    justify-content:space-between; gap:12px;
+    transform:translateY(100%); transition:transform .2s;
+  }
+  .save-bar.visible{ transform:translateY(0); }
+  .save-hint{ font-size:12px; color:var(--muted); }
+  .save-hint strong{ color:var(--warn); }
+  .save-btn{
+    padding:10px 24px; font-size:13px; font-weight:800; font-family:inherit;
+    border:0; border-radius:8px; cursor:pointer; color:#fff;
+    background:var(--primary); box-shadow:0 4px 12px rgba(255,122,24,.3);
+    transition:transform .06s, filter .06s;
+  }
+  .save-btn:active{ transform:translateY(1px); }
+  .save-ok{
+    font-size:12px; font-weight:700; color:var(--on);
+    display:none;
+  }
+
+  /* Log */
+  .log-list{ padding:8px 20px 16px; display:flex; flex-direction:column; gap:6px; max-height:200px; overflow-y:auto; }
+  .log-entry{
+    font-family:"JetBrains Mono",monospace; font-size:11px;
+    color:var(--muted); line-height:1.5;
+    display:flex; gap:10px;
+  }
+  .log-ts{ color:rgba(255,122,24,.7); flex-shrink:0; }
+  .log-msg{ color:#aaa; }
+
+  @media(max-width:480px){
+    .main{ padding:20px 16px; }
+    .stats-grid{ grid-template-columns:1fr 1fr; }
+    .admin-input{ width:140px; }
+    .topbar-meta .logout-btn{ display:block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">TuQR Admin</div>
+    <div class="login-title">Panel de control</div>
+    <div class="login-sub">Acceso restringido</div>
+    <div class="login-field">
+      <label>Contraseña</label>
+      <input type="password" id="pwdInput" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <div class="login-err" id="loginErr">Contraseña incorrecta</div>
+    <button class="login-btn" id="loginBtn">Ingresar →</button>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══════════════════════════════════════════════════════════ -->
+<div id="dashboard">
+  <div class="topbar">
+    <div class="topbar-brand">TuQR Admin</div>
+    <div class="topbar-meta">
+      <span id="saveMeta" style="font-size:11px;color:var(--muted)"></span>
+      <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Stats -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-icon">📊</div>
+        <div class="section-info">
+          <div class="section-title">Resumen</div>
+          <div class="section-desc">Estado actual del sistema</div>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-num" id="statUsuarios">—</div>
+          <div class="stat-label">Usuarios</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" id="statCuentas">—</div>
+          <div class="stat-label">Cuentas</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" id="statConsentidos">—</div>
+          <div class="stat-label">Con consentimiento</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Funcionalidades -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-icon">⚙️</div>
+        <div class="section-info">
+          <div class="section-title">Funcionalidades</div>
+          <div class="section-desc">Activa o desactiva features en tiempo real. Los cambios se aplican al guardar.</div>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Política de privacidad obligatoria</div>
+            <div class="toggle-sublabel">Muestra checkbox de consentimiento al crear usuario. Requerido por Ley 19.628.</div>
+          </div>
+          <span class="toggle-badge" id="badge-consent">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-consent" checked/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Teléfono obligatorio en registro</div>
+            <div class="toggle-sublabel">Si está desactivado, el campo teléfono es opcional al crear usuario.</div>
+          </div>
+          <span class="toggle-badge" id="badge-telRequired">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-telRequired"/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Sistema de referidos</div>
+            <div class="toggle-sublabel">Genera códigos ?ref= al compartir la app. Registra quién refirió a quién.</div>
+          </div>
+          <span class="toggle-badge" id="badge-referidos">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-referidos" checked/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Formulario de contacto</div>
+            <div class="toggle-sublabel">Habilita el modal de contacto en el menú hamburguesa.</div>
+          </div>
+          <span class="toggle-badge" id="badge-contacto">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-contacto" checked/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Modo mantenimiento</div>
+            <div class="toggle-sublabel">Bloquea la creación de nuevos usuarios. Los existentes siguen funcionando.</div>
+          </div>
+          <span class="toggle-badge" id="badge-mantenimiento">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-mantenimiento"/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Registro de nuevos usuarios</div>
+            <div class="toggle-sublabel">Permite o bloquea el botón "Crear usuario y cuenta de destino".</div>
+          </div>
+          <span class="toggle-badge" id="badge-registro">—</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-registro" checked/>
+            <span class="switch-track"></span>
+            <span class="switch-thumb"></span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Configuración -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-icon">🔧</div>
+        <div class="section-info">
+          <div class="section-title">Configuración</div>
+          <div class="section-desc">Parámetros del sistema. Cambios se aplican al guardar.</div>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="input-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Versión política de privacidad</div>
+            <div class="toggle-sublabel">Identificador de versión enviado en el registro de consentimiento.</div>
+          </div>
+          <input class="admin-input" id="cfg-policyVersion" value="PP-2026-03-01-v1" placeholder="PP-YYYY-MM-DD-v1"/>
+        </div>
+
+        <div class="input-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Mensaje de mantenimiento</div>
+            <div class="toggle-sublabel">Texto mostrado cuando el modo mantenimiento está activo.</div>
+          </div>
+          <input class="admin-input" id="cfg-mantenimientoMsg" value="Servicio en mantención. Vuelve pronto." placeholder="Mensaje…"/>
+        </div>
+
+        <div class="input-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Email de contacto</div>
+            <div class="toggle-sublabel">Correo mostrado en la política de privacidad y formulario de contacto.</div>
+          </div>
+          <input class="admin-input" id="cfg-contactEmail" value="privacidad@tuqr.cl" placeholder="email@tuqr.cl"/>
+        </div>
+
+        <div class="input-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Contraseña del panel</div>
+            <div class="toggle-sublabel">Cambia la contraseña de acceso a este panel.</div>
+          </div>
+          <input class="admin-input" id="cfg-newPassword" type="password" placeholder="Nueva contraseña"/>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Log de cambios -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-icon">📋</div>
+        <div class="section-info">
+          <div class="section-title">Log de cambios</div>
+          <div class="section-desc">Historial de modificaciones en esta sesión.</div>
+        </div>
+      </div>
+      <div class="log-list" id="logList">
+        <div class="log-entry">
+          <span class="log-ts">--:--:--</span>
+          <span class="log-msg">Sin cambios registrados aún.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:80px"></div>
+  </div><!-- /main -->
+</div><!-- /dashboard -->
+
+<!-- Save bar -->
+<div class="save-bar" id="saveBar">
+  <div class="save-hint">Tienes <strong id="pendingCount">0</strong> cambios sin guardar</div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span class="save-ok" id="saveOk">✓ Guardado</span>
+    <button class="save-btn" id="saveBtn">Guardar cambios</button>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════════
+// CONFIGURACIÓN — cambiar solo aquí
+// ════════════════════════════════════════════════════════════════════════
+const ADMIN_STORAGE_KEY = 'tuqr_admin_config';  // clave en localStorage
+const DEFAULT_PASSWORD  = 'tuqr2026';           // contraseña inicial
+const DATA_URL          = 'https://tuqrapp.github.io/tuqr.github.io/data.json';
+
+// Configuración por defecto (se usa si localStorage está vacío)
+const DEFAULT_CONFIG = {
+  password: DEFAULT_PASSWORD,
+  features: {
+    consent:        true,   // política de privacidad obligatoria
+    telRequired:    false,  // teléfono obligatorio
+    referidos:      true,   // sistema de referidos
+    contacto:       true,   // formulario de contacto
+    mantenimiento:  false,  // modo mantenimiento
+    registro:       true    // permite registrar nuevos usuarios
+  },
+  config: {
+    policyVersion:    'PP-2026-03-01-v1',
+    mantenimientoMsg: 'Servicio en mantención. Vuelve pronto.',
+    contactEmail:     'privacidad@tuqr.cl'
+  },
+  savedAt: null
+};
+
+// ════════════════════════════════════════════════════════════════════════
+// Estado
+// ════════════════════════════════════════════════════════════════════════
+let cfg = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+let pendingChanges = 0;
+let logEntries = [];
+
+// ── Cargar config desde localStorage ────────────────────────────────────
+function loadConfig(){
+  try{
+    const raw = localStorage.getItem(ADMIN_STORAGE_KEY);
+    if(raw){
+      const saved = JSON.parse(raw);
+      // Merge profundo para no perder keys nuevas en DEFAULT_CONFIG
+      cfg.password = saved.password || DEFAULT_PASSWORD;
+      Object.assign(cfg.features, saved.features || {});
+      Object.assign(cfg.config,   saved.config   || {});
+      cfg.savedAt = saved.savedAt || null;
+    }
+  }catch(e){ console.warn('Config parse error:', e); }
+}
+
+function saveConfig(){
+  cfg.savedAt = new Date().toISOString();
+  localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(cfg));
+}
+
+// ── Login ────────────────────────────────────────────────────────────────
+const loginScreen = document.getElementById('loginScreen');
+const dashboard   = document.getElementById('dashboard');
+const pwdInput    = document.getElementById('pwdInput');
+const loginErr    = document.getElementById('loginErr');
+
+function doLogin(){
+  loadConfig(); // cargar antes de comparar
+  if(pwdInput.value === cfg.password){
+    loginScreen.style.display = 'none';
+    dashboard.style.display   = 'block';
+    initDashboard();
+  } else {
+    loginErr.style.display = 'block';
+    pwdInput.value = '';
+    pwdInput.focus();
+    setTimeout(() => { loginErr.style.display = 'none'; }, 2500);
+  }
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+pwdInput.addEventListener('keydown', e => { if(e.key === 'Enter') doLogin(); });
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  dashboard.style.display = 'none';
+  loginScreen.style.display = 'flex';
+  pwdInput.value = '';
+  pendingChanges = 0;
+  document.getElementById('saveBar').classList.remove('visible');
+});
+
+// ── Inicializar dashboard ────────────────────────────────────────────────
+function initDashboard(){
+  // Llenar toggles desde cfg
+  const toggleIds = ['consent','telRequired','referidos','contacto','mantenimiento','registro'];
+  toggleIds.forEach(key => {
+    const el = document.getElementById('toggle-' + key);
+    if(el){
+      el.checked = !!cfg.features[key];
+      updateBadge(key, el.checked);
+      el.addEventListener('change', () => {
+        cfg.features[key] = el.checked;
+        updateBadge(key, el.checked);
+        markChange(`Feature "${key}" → ${el.checked ? 'ON' : 'OFF'}`);
+      });
+    }
+  });
+
+  // Llenar inputs de config
+  const inputMap = {
+    'cfg-policyVersion':    'policyVersion',
+    'cfg-mantenimientoMsg': 'mantenimientoMsg',
+    'cfg-contactEmail':     'contactEmail'
+  };
+  Object.entries(inputMap).forEach(([elId, cfgKey]) => {
+    const el = document.getElementById(elId);
+    if(el){
+      el.value = cfg.config[cfgKey] || '';
+      el.addEventListener('input', () => {
+        cfg.config[cfgKey] = el.value;
+        markChange(`Config "${cfgKey}" actualizado`);
+      });
+    }
+  });
+
+  // Contraseña
+  document.getElementById('cfg-newPassword').addEventListener('input', function(){
+    if(this.value.length >= 6){
+      cfg.password = this.value;
+      markChange('Contraseña actualizada');
+    }
+  });
+
+  // Guardar
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    saveConfig();
+    pendingChanges = 0;
+    document.getElementById('saveBar').classList.remove('visible');
+    const saveOk = document.getElementById('saveOk');
+    saveOk.style.display = 'block';
+    const ts = new Date().toLocaleTimeString('es-CL');
+    document.getElementById('saveMeta').textContent = `Guardado ${ts}`;
+    addLog('CONFIG GUARDADA en localStorage');
+    setTimeout(() => { saveOk.style.display = 'none'; }, 2000);
+  });
+
+  // Meta de última vez guardado
+  if(cfg.savedAt){
+    const d = new Date(cfg.savedAt);
+    document.getElementById('saveMeta').textContent =
+      `Último guardado: ${d.toLocaleDateString('es-CL')} ${d.toLocaleTimeString('es-CL')}`;
+  }
+
+  loadStats();
+}
+
+function updateBadge(key, on){
+  const el = document.getElementById('badge-' + key);
+  if(!el) return;
+  el.textContent = on ? 'ON' : 'OFF';
+  el.className = 'toggle-badge ' + (on ? 'badge-on' : 'badge-off');
+}
+
+function markChange(msg){
+  pendingChanges++;
+  document.getElementById('pendingCount').textContent = pendingChanges;
+  document.getElementById('saveBar').classList.add('visible');
+  addLog(msg);
+}
+
+function addLog(msg){
+  const ts = new Date().toLocaleTimeString('es-CL');
+  logEntries.unshift({ ts, msg });
+  if(logEntries.length > 50) logEntries.pop();
+  renderLog();
+}
+
+function renderLog(){
+  const list = document.getElementById('logList');
+  list.innerHTML = logEntries.map(e => `
+    <div class="log-entry">
+      <span class="log-ts">${e.ts}</span>
+      <span class="log-msg">${e.msg}</span>
+    </div>
+  `).join('');
+}
+
+// ── Stats desde data.json ─────────────────────────────────────────────────
+async function loadStats(){
+  try{
+    const res  = await fetch(DATA_URL + '?ts=' + Date.now(), { cache: 'no-store' });
+    const data = await res.json();
+    const entries = Object.values(data);
+    const total   = entries.length;
+    // Contar RUTs únicos como "usuarios"
+    const ruts    = new Set(entries.map(e => e.rut?.replace(/[\.\-\s]/g,'').toUpperCase()).filter(Boolean));
+    const consent = entries.filter(e => e.consent && e.consent.accepted).length;
+
+    document.getElementById('statUsuarios').textContent = ruts.size;
+    document.getElementById('statCuentas').textContent  = total;
+    document.getElementById('statConsentidos').textContent = consent;
+    addLog(`Stats cargados: ${total} cuentas, ${ruts.size} RUTs únicos, ${consent} con consentimiento`);
+  }catch(e){
+    document.getElementById('statUsuarios').textContent = '?';
+    document.getElementById('statCuentas').textContent  = '?';
+    document.getElementById('statConsentidos').textContent = '?';
+    addLog('No se pudo cargar data.json para stats');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// EXPORT de config para que otros archivos la lean
+// Uso en admin.html / app.html:
+//   const cfg = JSON.parse(localStorage.getItem('tuqr_admin_config') || '{}');
+//   const features = cfg.features || {};
+//   if(!features.consent) { /* ocultar checkbox */ }
+// ════════════════════════════════════════════════════════════════════════
+</script>
+</body>
+</html>

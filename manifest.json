@@ -1,0 +1,24 @@
+{
+  "name": "TuQR",
+  "short_name": "TuQR",
+  "description": "Genera tu QR de cobro",
+  "start_url": "./admin.html",
+  "display": "standalone",
+  "background_color": "#f2f3f5",
+  "theme_color": "#ff7a18",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./LogoQ_transparent.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./LogoQ_transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

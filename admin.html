@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#ff7a18"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="TuQR"/>
+<link rel="manifest" href="./manifest.json"/>
+<link rel="apple-touch-icon" href="./LogoQ_transparent.png"/>
+<title>TuQR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root{
+    --primary:#ff7a18; --accent:#ffd400; --bg:#f2f3f5; --card:#ffffff;
+    --text:#1a1a1a; --muted:#5a5a5a; --border:rgba(0,0,0,.08);
+    --shadow:0 10px 24px rgba(0,0,0,.08); --radius:18px;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    font-family:"Poppins",system-ui,sans-serif; margin:0; padding:16px 12px;
+    background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; min-height:100vh;
+  }
+  .wrap{ max-width:480px; margin:0 auto; }
+  .topbar{ display:flex; align-items:center; margin-bottom:8px; }
+  .hamburger{
+    background:var(--primary); border:none; cursor:pointer;
+    padding:10px 12px; border-radius:12px; display:flex; flex-direction:column; gap:5px;
+    box-shadow:0 3px 10px rgba(255,122,24,.35);
+    -webkit-tap-highlight-color:transparent; transition:filter .1s, transform .06s;
+  }
+  .hamburger span{ display:block; width:22px; height:2.5px; border-radius:2px; background:#fff; }
+  .hamburger:active{ transform:scale(.95); filter:brightness(.92); }
+  .drawer-overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; }
+  .drawer-overlay.open{ display:block; }
+  .drawer{
+    position:fixed; top:0; left:-260px; bottom:0; width:240px; background:#fff; z-index:201;
+    box-shadow:4px 0 28px rgba(0,0,0,.18); transition:left .22s cubic-bezier(.4,0,.2,1);
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{ left:0; }
+  .drawer-header{ padding:32px 20px 22px; background:linear-gradient(135deg,var(--primary),var(--accent)); }
+  .drawer-logo{ width:100px; height:auto; }
+  .drawer-body{ padding:16px 8px; display:flex; flex-direction:column; gap:4px; flex:1; }
+  .drawer-item{
+    display:flex; align-items:center; gap:14px; padding:15px 14px; border-radius:12px;
+    font-size:15px; font-weight:700; color:var(--text); cursor:pointer;
+    background:none; border:none; font-family:inherit; width:100%; text-align:left;
+    -webkit-tap-highlight-color:transparent; transition:background .1s;
+  }
+  .drawer-item:active{ background:#f2f2f2; }
+  .drawer-item .di-icon{ font-size:20px; width:30px; text-align:center; }
+  .drawer-sep{ border:none; border-top:1px solid rgba(0,0,0,.08); margin:8px 14px; }
+  .brand{ display:flex; justify-content:center; margin:6px 0 16px; }
+  .brand img{ width:180px; height:auto; filter:drop-shadow(0 6px 10px rgba(0,0,0,.10)); }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:24px 20px 28px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:8px;
+    background:linear-gradient(90deg,rgba(255,212,0,.95),rgba(255,122,24,.95));
+  }
+  h1{ font-size:22px; font-weight:800; margin:8px 0 6px; text-align:center; }
+  .sub{ font-size:13px; color:var(--muted); text-align:center; margin-bottom:20px; line-height:1.4; }
+  .opciones{ display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+  .btn-opcion{
+    padding:16px; width:100%; font-size:15px; font-weight:800; font-family:inherit;
+    border:2px solid var(--border); border-radius:14px; cursor:pointer;
+    background:#fff; color:var(--text); text-align:left;
+    display:flex; align-items:center; gap:14px;
+    -webkit-tap-highlight-color:transparent; transition:border-color .12s, background .12s;
+  }
+  .btn-opcion:active{ background:#f7f7f7; }
+  .btn-opcion.primary{ border-color:var(--primary); background:rgba(255,122,24,.04); }
+  .btn-opcion .icon{
+    width:40px; height:40px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .btn-opcion.primary .icon{ background:rgba(255,122,24,.12); }
+  .btn-opcion.secondary .icon{ background:#f0f0f0; }
+  .btn-opcion .label{ display:flex; flex-direction:column; gap:2px; }
+  .btn-opcion .label strong{ font-size:15px; font-weight:800; }
+  .btn-opcion .label span{ font-size:12px; font-weight:500; color:var(--muted); }
+  label{ font-weight:700; font-size:13px; color:var(--muted); margin-top:14px; display:block; margin-bottom:5px; }
+  input, select{
+    width:100%; padding:11px 12px; font-size:14px; font-family:inherit;
+    border:1.5px solid rgba(0,0,0,.12); border-radius:12px; background:#fff; color:var(--text);
+    outline:none; transition:border-color .15s, box-shadow .15s; -webkit-appearance:none; appearance:none;
+  }
+  input:focus, select:focus{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(255,122,24,.12); }
+  input.invalid{ border-color:#e00; background:#fff8f8; }
+  input.valid{ border-color:#0a7; background:#f5fbf8; }
+  .field-err{ color:#c00; font-size:12px; font-weight:600; margin-top:4px; display:none; }
+  .field-err.show{ display:block; }
+  .phone-wrap{ display:flex; gap:8px; }
+  .phone-prefix{
+    width:52px; flex-shrink:0; padding:11px 8px; font-size:13px; font-family:inherit;
+    border:1.5px solid rgba(0,0,0,.12); border-radius:12px;
+    background:#f7f7f7; color:var(--muted); text-align:center; outline:none;
+  }
+  .phone-wrap input{ flex:1; min-width:0; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .divider{ margin:20px 0 4px; border:none; border-top:1px dashed rgba(0,0,0,.10); }
+  .cta{
+    margin-top:20px; padding:13px; width:100%; font-size:15px; font-weight:800; font-family:inherit;
+    border:0; border-radius:12px; cursor:pointer; color:#fff; background:var(--primary);
+    box-shadow:0 6px 12px rgba(255,122,24,.22); -webkit-tap-highlight-color:transparent;
+    transition:transform .06s ease, filter .06s ease;
+  }
+  .cta:active{ transform:translateY(1px); filter:brightness(.98); }
+  .link-back{
+    display:block; text-align:center; margin-top:14px;
+    font-size:13px; font-weight:700; color:var(--muted); cursor:pointer;
+    background:none; border:none; font-family:inherit; width:100%;
+  }
+  .link-back:active{ color:var(--primary); }
+  .ok-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:24px 20px 28px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .ok-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:8px;
+    background:linear-gradient(90deg,rgba(0,200,120,.8),rgba(0,170,100,.9));
+  }
+  .ok-pill{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px;
+    font-size:13px; font-weight:700; color:#0a7;
+    background:rgba(0,170,120,.10); border:1px solid rgba(0,170,120,.18);
+  }
+  .ok-nombre{ font-size:18px; font-weight:800; margin-top:2px; }
+  .wait-box{
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+    background:#f7f7f7; border-radius:14px; padding:20px 16px; text-align:center;
+  }
+  .spinner{
+    width:36px; height:36px; border-radius:50%;
+    border:4px solid rgba(255,122,24,.15); border-top-color:var(--primary);
+    animation:spin 0.9s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .wait-text{ font-size:14px; font-weight:700; color:var(--text); line-height:1.4; }
+  .wait-sub{ font-size:12px; color:var(--muted); }
+  .err-box{
+    font-size:13px; color:#b00; font-weight:600; text-align:center;
+    background:rgba(190,0,0,.08); border:1px solid rgba(190,0,0,.14); border-radius:12px; padding:12px;
+  }
+  .err{
+    margin-top:12px; font-weight:800; padding:10px 12px; border-radius:12px; font-size:14px;
+    white-space:pre-wrap; color:#b00; background:rgba(190,0,0,.08); border:1px solid rgba(190,0,0,.14);
+  }
+  .warn{
+    margin-top:12px; font-weight:600; padding:12px 14px; border-radius:12px; font-size:13px;
+    color:#7a4a00; background:rgba(255,180,0,.12); border:1px solid rgba(255,160,0,.3); line-height:1.5;
+  }
+  .warn a{ color:var(--primary); font-weight:800; text-decoration:underline; cursor:pointer; }
+  .help{ margin-top:14px; font-size:12px; color:#888; line-height:1.4; text-align:center; }
+  .cta-ir{
+    padding:13px; width:100%; font-size:15px; font-weight:800; font-family:inherit;
+    border:0; border-radius:12px; cursor:pointer; color:#fff; background:var(--primary);
+    box-shadow:0 6px 12px rgba(255,122,24,.22); -webkit-tap-highlight-color:transparent;
+    transition:transform .06s ease; display:block; text-align:center; margin-top:0;
+  }
+  .cta-ir:active{ transform:translateY(1px); }
+  .cta-ir.secondary{ background:#f0f0f0; color:var(--text); box-shadow:none; margin-top:10px; }
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,.5);
+    z-index:1000; align-items:flex-end; justify-content:center;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background:#fff; border-radius:24px 24px 0 0; padding:28px 20px 40px;
+    width:100%; max-width:480px; max-height:90vh; overflow-y:auto;
+    box-shadow:0 -8px 32px rgba(0,0,0,.15); animation:slideUp .25s ease; position:relative;
+  }
+  @keyframes slideUp{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
+  .modal-handle{ width:40px; height:4px; border-radius:999px; background:#ddd; margin:0 auto 20px; display:block; }
+  .modal-title{ font-size:20px; font-weight:800; margin-bottom:4px; }
+  .modal-sub{ font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.4; }
+  .modal-close{
+    position:absolute; top:16px; right:20px; font-size:22px; cursor:pointer;
+    color:var(--muted); background:none; border:none; font-family:inherit;
+  }
+  textarea{
+    width:100%; padding:11px 12px; font-size:14px; font-family:inherit;
+    border:1.5px solid rgba(0,0,0,.12); border-radius:12px; background:#fff; color:var(--text);
+    outline:none; resize:vertical; min-height:100px; transition:border-color .15s, box-shadow .15s;
+  }
+  textarea:focus{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(255,122,24,.12); }
+  .char-count{ font-size:11px; color:var(--muted); text-align:right; margin-top:3px; }
+  .compartir-qr-box{ display:flex; justify-content:center; margin:12px 0 8px; }
+  .compartir-link-wrap{ display:flex; gap:8px; align-items:center; margin-top:4px; }
+  .compartir-link-input{ flex:1; padding:10px 12px; font-size:12px; font-family:inherit; border:1.5px solid rgba(0,0,0,.12); border-radius:10px; background:#f7f7f7; color:var(--muted); outline:none; }
+  .compartir-copy-btn{ padding:10px 14px; font-size:12px; font-weight:800; font-family:inherit; border:1.5px solid var(--primary); border-radius:10px; color:var(--primary); background:#fff; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+    .compartir-seccion-label{ font-size:16px; font-weight:400; color:var(--text); margin:4px 0 14px; text-align:center; line-height:1.3; }
+  .compartir-separador{ font-size:20px; font-weight:800; color:var(--primary); text-align:center; margin:22px 0; }
+  .compartir-copy-ok{ font-size:12px; font-weight:700; color:#0a7; margin-top:6px; display:none; text-align:center; }
+
+  /* Pantalla escanear QR */
+  .scan-box{
+    width:100%; aspect-ratio:1/1; max-width:280px; margin:0 auto;
+    border-radius:18px; overflow:hidden; background:#000; position:relative;
+  }
+  #scanVideo{ width:100%; height:100%; object-fit:cover; display:block; }
+  .scan-frame{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(to right, var(--primary) 3px, transparent 3px) 0 0,
+      linear-gradient(to right, var(--primary) 3px, transparent 3px) 0 100%,
+      linear-gradient(to left,  var(--primary) 3px, transparent 3px) 100% 0,
+      linear-gradient(to left,  var(--primary) 3px, transparent 3px) 100% 100%,
+      linear-gradient(to bottom,var(--primary) 3px, transparent 3px) 0 0,
+      linear-gradient(to bottom,var(--primary) 3px, transparent 3px) 100% 0,
+      linear-gradient(to top,   var(--primary) 3px, transparent 3px) 0 100%,
+      linear-gradient(to top,   var(--primary) 3px, transparent 3px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+  }
+  .scan-line{
+    position:absolute; left:10%; right:10%; height:2px;
+    background:linear-gradient(90deg,transparent,var(--primary),transparent);
+    animation:scanAnim 2s ease-in-out infinite;
+  }
+  @keyframes scanAnim{
+    0%{ top:10%; } 50%{ top:85%; } 100%{ top:10%; }
+  }
+  .scan-id-ok{
+    background:#f0fdf4; border:1.5px solid #0a7; border-radius:12px;
+    padding:12px 14px; font-size:13px; font-weight:700; color:#0a7;
+    display:none; text-align:center; word-break:break-all; margin-top:8px;
+  }
+  .scan-id-err{
+    background:#fff8f8; border:1.5px solid #e00; border-radius:12px;
+    padding:12px 14px; font-size:13px; font-weight:700; color:#c00;
+    display:none; text-align:center; margin-top:8px;
+  }
+
+  /* Consentimiento */
+  .consent-wrap{
+    display:flex; align-items:flex-start; gap:10px;
+    background:#fffde7; border:1.5px solid #ffd400;
+    border-radius:12px; padding:12px 14px; margin-top:8px;
+  }
+  .consent-wrap input[type="checkbox"]{
+    -webkit-appearance:checkbox !important;
+    appearance:checkbox !important;
+    width:20px; height:20px; min-width:20px; margin-top:2px;
+    accent-color:var(--primary); cursor:pointer; flex-shrink:0;
+    padding:0 !important; border:1.5px solid rgba(0,0,0,.3) !important;
+    background:#fff !important; box-shadow:none !important;
+    border-radius:4px !important;
+  }
+  .consent-wrap input[type="checkbox"]:checked{
+    accent-color:var(--primary);
+    border-color:var(--primary) !important;
+  }
+  .consent-text{
+    font-size:12px; line-height:1.6; color:var(--text);
+  }
+  .consent-text a{
+    color:var(--primary); font-weight:700; text-decoration:underline;
+  }
+  .consent-err{
+    font-size:12px; font-weight:700; color:#c00;
+    margin-top:4px; display:none;
+  }
+  .consent-err.show{ display:block; }
+
+  /* Modal Política de Privacidad */
+  .privacy-modal-overlay{
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,.55); z-index:400;
+    align-items:flex-end; justify-content:center;
+  }
+  .privacy-modal-overlay.open{ display:flex; }
+  .privacy-modal-box{
+    background:#fff; border-radius:24px 24px 0 0;
+    padding:28px 20px 40px; width:100%; max-width:480px;
+    max-height:85vh; overflow-y:auto;
+    box-shadow:0 -8px 32px rgba(0,0,0,.18);
+    animation:slideUp .25s ease;
+  }
+  .privacy-modal-title{
+    font-size:18px; font-weight:800; margin-bottom:16px; color:var(--primary);
+  }
+  .privacy-modal-body{
+    font-size:13px; line-height:1.7; color:var(--text);
+  }
+  .privacy-modal-body h2{
+    font-size:14px; font-weight:800; margin:16px 0 4px; color:var(--text);
+  }
+  .privacy-modal-body ul{
+    padding-left:16px; margin:4px 0 8px;
+  }
+  .privacy-modal-body li{ margin-bottom:3px; }
+  .privacy-close-btn{
+    position:sticky; top:0; float:right;
+    font-size:22px; cursor:pointer; color:var(--muted);
+    background:none; border:none; font-family:inherit;
+    line-height:1;
+  }
+</style>
+</head>
+<body>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- Drawer BIENVENIDO: solo Contacto -->
+<nav class="drawer" id="drawerBienvenido">
+  <div class="drawer-header"><img class="drawer-logo" src="./TuQRLogo.png" alt="TuQR"/></div>
+  <div class="drawer-body">
+    <button class="drawer-item" id="menuCompartirBienvenido">Comparte la app</button>
+    <hr class="drawer-sep"/>
+    <button class="drawer-item" id="menuContactoBienvenido">Contacto</button>
+  </div>
+</nav>
+
+<!-- Drawer CREAR / INGRESAR: Inicio + Mi Usuario + Contacto -->
+<nav class="drawer" id="drawerSub">
+  <div class="drawer-header"><img class="drawer-logo" src="./TuQRLogo.png" alt="TuQR"/></div>
+  <div class="drawer-body">
+    <button class="drawer-item" id="menuInicio">Inicio</button>
+    <button class="drawer-item" id="menuMiUsuario">Mi Usuario</button>
+    <button class="drawer-item" id="menuCompartirSub">Comparte la app</button>
+    <hr class="drawer-sep"/>
+    <button class="drawer-item" id="menuContactoSub">Contacto</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="topbar">
+    <button class="hamburger" id="btnHamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="brand"><img src="./TuQRLogo.png" alt="TuQR"/></div>
+
+  <!-- Bienvenido a TuQR -->
+  <div id="screenOpciones" class="card" style="display:none">
+    <h1>Bienvenido a TuQR</h1>
+    <p class="sub">¿Qué quieres hacer?</p>
+    <div class="opciones">
+      <button class="btn-opcion primary" id="btnIrCrear">
+        <div class="icon">✨</div>
+        <div class="label">
+          <strong>Crear usuario</strong>
+          <span>Primera vez — registra tus datos</span>
+        </div>
+      </button>
+      <button class="btn-opcion secondary" id="btnIrActivar">
+        <div class="icon">🔑</div>
+        <div class="label">
+          <strong>Ingresar</strong>
+          <span>Ya tengo usuario — acceder a mi QR</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Ingresar -->
+  <div id="screenActivar" class="card" style="display:none">
+    <h1>Ingresar</h1>
+    <p class="sub">Ingresa tu RUT y teléfono para identificarte.</p>
+    <label for="actRut">RUT</label>
+    <input id="actRut" placeholder="12.345.678-9" maxlength="12"/>
+    <div class="field-err" id="err-actRut">RUT inválido</div>
+    <label for="actTel">Teléfono</label>
+    <div class="phone-wrap">
+      <input class="phone-prefix" value="+56" readonly/>
+      <input id="actTel" placeholder="912345678" inputmode="numeric" maxlength="9"/>
+    </div>
+    <div class="field-err" id="err-actTel">Número inválido (9 dígitos, empieza en 9)</div>
+    <div class="field-err" id="err-actGeneral">No encontramos un usuario con esos datos.</div>
+    <button class="cta" id="btnDoActivar">Continuar</button>
+    <button class="link-back" id="backFromActivar">← Volver</button>
+  </div>
+
+  <!-- Escanear QR físico -->
+  <div id="screenEscanear" class="card" style="display:none">
+    <h1>Escanea el QR</h1>
+    <p class="sub">Apunta la cámara al QR impreso que vas a asignar a este usuario.</p>
+    <div class="scan-box">
+      <video id="scanVideo" autoplay muted playsinline></video>
+      <div class="scan-frame"></div>
+      <div class="scan-line"></div>
+    </div>
+    <div class="scan-id-ok" id="scanOk"></div>
+    <div class="scan-id-err" id="scanErr"></div>
+    <button class="cta" id="btnUsarQR" style="display:none;margin-top:16px">Usar este QR →</button>
+    <button class="link-back" id="backFromEscanear">← Volver</button>
+  </div>
+
+  <!-- Crear usuario: L1 Nombre / L2 RUT+Tel / L3 Correo / L4 Banco+Tipo / L5 Número -->
+  <div id="screenCrear" class="card" style="display:none">
+    <h1>Crear usuario y cuenta de destino</h1>
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" placeholder="Juan López"/>
+
+    <div class="row">
+      <div>
+        <label for="rut">RUT</label>
+        <input id="rut" placeholder="12.345.678-9" maxlength="12"/>
+        <div class="field-err" id="err-rut">RUT inválido</div>
+      </div>
+      <div>
+        <label for="telefono">Teléfono (+56)</label>
+        <input id="telefono" placeholder="9XXXXXXXX" inputmode="numeric" maxlength="9"/>
+        <div class="field-err" id="err-tel">9 dígitos, empieza en 9</div>
+      </div>
+    </div>
+
+    <label for="correo">Correo</label>
+    <input id="correo" placeholder="correo@dominio.cl" inputmode="email"/>
+    <div class="field-err" id="err-correo">Formato inválido</div>
+
+    <p style="text-align:center;font-weight:800;color:var(--primary);font-size:15px;margin:16px 0 4px">Datos bancarios</p>
+
+    <div class="row">
+      <div>
+        <label for="banco">Banco</label>
+        <select id="banco">
+          <option value="">— Selecciona —</option>
+          <option>Banco de Chile</option><option>Banco BICE</option><option>Banco Consorcio</option>
+          <option>Banco BCI</option><option>Banco Estado</option><option>Banco Falabella</option>
+          <option>Banco Internacional</option><option>Banco Itaú</option><option>Banco Ripley</option>
+          <option>Banco Santander</option><option>Banco Security</option><option>Scotiabank</option>
+          <option>Tapp Caja Los Andes</option><option>Banco Tenpo</option><option>Mercado Pago</option>
+        </select>
+      </div>
+      <div>
+        <label for="tipoCuenta">Tipo de cuenta</label>
+        <select id="tipoCuenta">
+          <option value="">— Selecciona —</option>
+          <option value="Cuenta Corriente">Corriente</option>
+          <option value="Cuenta Vista">Vista</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="numeroCuenta">N° de cuenta</label>
+    <input id="numeroCuenta" placeholder="Solo números" inputmode="numeric"/>
+    <div class="field-err" id="err-cuenta">Solo números</div>
+
+    <!-- Consentimiento RGPD / Ley 19.628 -->
+    <div class="consent-wrap">
+      <input type="checkbox" id="consentCheck" aria-required="true"/>
+      <label class="consent-text" for="consentCheck">
+        Al hacer clic en "Crear", declaro haber leído y aceptado la
+        <a href="#" id="linkPrivacidad">Política de Privacidad</a>
+        y autorizo el tratamiento de mis datos personales.
+      </label>
+    </div>
+    <div class="consent-err" id="err-consent">Debes aceptar la Política de Privacidad para continuar.</div>
+
+    <button class="cta" id="save">Crear</button>
+    <div id="msg-err"></div>
+    <button class="link-back" id="backFromCrear">← Volver</button>
+    <div class="help">Los datos se guardan vía Cloudflare Worker.</div>
+  </div>
+
+  <!-- Creado + polling -->
+  <div id="screenCreado" style="display:none">
+    <div class="ok-card">
+      <div>
+        <div class="ok-pill">✓ Usuario creado</div>
+        <div class="ok-nombre" id="resNombre"></div>
+      </div>
+      <div class="wait-box" id="waitBox">
+        <div class="spinner"></div>
+        <div class="wait-text">Activando tu cuenta destino…</div>
+        <div class="wait-sub">Puede tardar hasta un minuto</div>
+      </div>
+      <div id="msgQRError" style="display:none; flex-direction:column; gap:10px;">
+        <div class="err-box">No pudimos confirmar la activación. Intenta abriendo tu QR manualmente.</div>
+        <button class="cta-ir" id="btnIrApp">Ver mi QR →</button>
+        <button class="cta-ir secondary" id="btnReintentar">↺ Reintentar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal Contacto -->
+<div class="modal-overlay" id="modalContacto">
+  <div class="modal-box">
+    <button class="modal-close" id="btnCerrarModal">✕</button>
+    <span class="modal-handle"></span>
+    <div class="modal-title">Contacto</div>
+    <div class="modal-sub">Te responderemos al correo de tu usuario.</div>
+    <label for="cRut">RUT</label>
+    <input id="cRut" placeholder="12.345.678-9" maxlength="12"/>
+    <div class="field-err" id="err-cRut">RUT inválido</div>
+    <label for="cCuentaDestino">Cuenta Destino</label>
+    <select id="cCuentaDestino"><option value="">— Selecciona —</option></select>
+    <div class="field-err" id="err-cCuentaDestino">Selecciona una cuenta destino</div>
+    <label for="cTipo">Tipo de problema</label>
+    <select id="cTipo">
+      <option value="">— Selecciona —</option>
+      <option value="cuenta_destino">Cuenta Destino</option>
+      <option value="modificar_datos">Modificar datos</option>
+      <option value="otros">Otros</option>
+    </select>
+    <div class="field-err" id="err-cTipo">Selecciona un tipo</div>
+    <label for="cMensaje">Describe tu problema</label>
+    <textarea id="cMensaje" maxlength="500" placeholder="Escribe aquí..."></textarea>
+    <div class="char-count"><span id="charCount">0</span>/500</div>
+    <div class="field-err" id="err-cMensaje">Escribe al menos 10 caracteres</div>
+    <button class="cta" id="btnEnviarContacto">Enviar</button>
+    <div id="msg-contacto-err"></div>
+  </div>
+</div>
+
+<!-- ══ Modal Compartir la app ══ -->
+<div class="modal-overlay" id="modalCompartir">
+  <div class="modal-box">
+    <button class="modal-close" id="btnCerrarCompartir">✕</button>
+    <span class="modal-handle"></span>
+    <div class="modal-title" style="color:var(--primary);text-align:center;margin-bottom:24px">Comparte la app</div>
+    <div class="compartir-seccion-label">Pídele a tu amigo que escanee el QR</div>
+    <div class="compartir-qr-box"><div id="compartirQRContainer"></div></div>
+    <div class="compartir-separador">o</div>
+    <div class="compartir-seccion-label">Copia y envía el link a tu amigo</div>
+    <div class="compartir-link-wrap">
+      <input class="compartir-link-input" id="compartirLinkInput" readonly value="https://tuqrapp.github.io/tuqr.github.io/welcome.html"/>
+      <button class="compartir-copy-btn" id="compartirCopyBtn">Copiar</button>
+    </div>
+    <div class="compartir-copy-ok" id="compartirCopyOk">✓ Link copiado</div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+
+<!-- ══ Modal Política de Privacidad ══ -->
+<div class="privacy-modal-overlay" id="modalPrivacidad">
+  <div class="privacy-modal-box">
+    <button class="privacy-close-btn" id="btnCerrarPrivacidad">✕</button>
+    <div class="privacy-modal-title">Política de Privacidad y Tratamiento de Datos Personales</div>
+    <div class="privacy-modal-body">
+      <h2>1. Responsable del Tratamiento</h2>
+      <p>El responsable del tratamiento de los datos personales es <strong>TuQR SpA</strong>, quien realiza el tratamiento conforme a la legislación vigente, especialmente la <strong>Ley Nº 19.628</strong> sobre Protección de la Vida Privada y demás normativa aplicable.</p>
+
+      <h2>2. Datos Personales Tratados</h2>
+      <p>TuQR podrá recolectar y tratar los siguientes datos proporcionados voluntariamente por el Usuario:</p>
+      <ul>
+        <li>Nombre completo</li>
+        <li>Rol Único Tributario (RUT)</li>
+        <li>Número telefónico</li>
+        <li>Dirección de correo electrónico</li>
+        <li>Información de entidad bancaria</li>
+        <li>Tipo de cuenta bancaria</li>
+      </ul>
+      <p>TuQR no recopila saldos, claves bancarias ni credenciales de acceso a instituciones financieras.</p>
+
+      <h2>3. Finalidades del Tratamiento</h2>
+      <p>Los datos personales serán tratados para las siguientes finalidades legítimas:</p>
+      <ul>
+        <li>Creación y administración de cuentas de usuario</li>
+        <li>Prestación y operación del servicio TuQR</li>
+        <li>Verificación de identidad declarativa del usuario</li>
+        <li>Personalización de funcionalidades</li>
+        <li>Soporte técnico y atención de requerimientos</li>
+        <li>Prevención de fraude y uso indebido del servicio</li>
+        <li>Desarrollo y mejora de productos y servicios</li>
+      </ul>
+
+      <h2>4. Base Legal del Tratamiento</h2>
+      <ul>
+        <li>Consentimiento expreso del titular</li>
+        <li>Ejecución de relación contractual digital</li>
+        <li>Cumplimiento de obligaciones legales aplicables</li>
+      </ul>
+
+      <h2>5. Analítica e Inteligencia Comercial</h2>
+      <p>TuQR podrá utilizar datos anonimizados y agregados con fines estadísticos, analíticos y de inteligencia de mercado, asegurando que dichos datos no permitan identificar a los usuarios ni sean revertidos a datos personales.</p>
+
+      <h2>6. Compartición de Datos</h2>
+      <p>TuQR no venderá ni transferirá datos personales individualizados a terceros, salvo en los siguientes casos:</p>
+      <ul>
+        <li>Obligación legal o requerimiento de autoridad competente</li>
+        <li>Proveedores tecnológicos necesarios para la operación del servicio</li>
+        <li>Integraciones solicitadas expresamente por el usuario</li>
+      </ul>
+      <p>Todos los terceros proveedores están sujetos a obligaciones de confidencialidad y seguridad.</p>
+
+      <h2>7. Seguridad de la Información</h2>
+      <p>TuQR implementa medidas técnicas y organizativas razonables para proteger los datos personales contra acceso no autorizado, pérdida, alteración o divulgación.</p>
+
+      <h2>8. Conservación de Datos</h2>
+      <p>Los datos serán almacenados únicamente durante el tiempo necesario para cumplir las finalidades descritas o mientras exista una relación activa con el usuario, salvo obligación legal de conservación.</p>
+
+      <h2>9. Derechos del Titular</h2>
+      <p>El titular podrá ejercer en cualquier momento sus derechos de acceso, rectificación, cancelación, oposición y revocación de consentimiento mediante solicitud enviada a: <strong>privacidad<!-- -->@tuqr.cl</strong></p>
+
+      <h2>10. Consentimiento</h2>
+      <p>Al crear una cuenta en TuQR, el usuario declara haber leído esta Política, comprender el tratamiento de sus datos y otorgar consentimiento expreso e informado.</p>
+
+      <h2>11. Modificaciones</h2>
+      <p>TuQR podrá actualizar esta política para adaptarla a cambios regulatorios, tecnológicos u operativos. Las modificaciones serán informadas oportunamente a los usuarios.</p>
+
+      <p style="margin-top:16px;font-size:11px;color:var(--muted)">Versión: PP-2026-03-01-v1</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  emailjs.init('yejdBOXVs6y3d8piR');
+
+  const WORKER_URL    = 'https://tuqr-worker.nestragues.workers.dev/';
+  const BASE_URL      = 'https://tuqrapp.github.io/tuqr.github.io/';
+  const DATA_URL      = BASE_URL + 'data.json';
+  const STORAGE_KEY   = 'tuqr_id';
+  const POLL_INTERVAL = 5000;
+  const POLL_MAX      = 24;
+
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
+
+  const urlParams = new URLSearchParams(location.search);
+  const accion    = urlParams.get('accion');
+
+  // ── pantalla activa ───────────────────────────────────────────────────────
+  let pantallaActual = 'screenOpciones';
+
+  function mostrarPantalla(id){
+    ['screenOpciones','screenActivar','screenEscanear','screenCrear','screenCreado'].forEach(s=>{
+      document.getElementById(s).style.display = s===id ? '' : 'none';
+    });
+    pantallaActual = id;
+    sincronizarDrawers();
+  }
+
+  function sincronizarDrawers(){
+    // Mientras screenOpciones: drawer Bienvenido; en el resto: drawer Sub
+    const esBienvenido = pantallaActual === 'screenOpciones';
+    document.getElementById('drawerBienvenido').style.display = esBienvenido ? '' : 'none';
+    document.getElementById('drawerSub').style.display        = esBienvenido ? 'none' : '';
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  if(accion === 'cambiar'){
+    localStorage.removeItem(STORAGE_KEY);
+    mostrarPantalla('screenOpciones');
+  } else {
+    const savedId = localStorage.getItem(STORAGE_KEY);
+    if(savedId){ window.location.replace('./app.html'); }
+    else{ mostrarPantalla('screenOpciones'); }
+  }
+
+  // ── Drawer ────────────────────────────────────────────────────────────────
+  function abrirDrawer(){
+    const esBienvenido = pantallaActual === 'screenOpciones';
+    document.getElementById(esBienvenido ? 'drawerBienvenido' : 'drawerSub').classList.add('open');
+    document.getElementById('drawerOverlay').classList.add('open');
+  }
+  function cerrarDrawer(){
+    document.getElementById('drawerBienvenido').classList.remove('open');
+    document.getElementById('drawerSub').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+  }
+
+  document.getElementById('btnHamburger').addEventListener('click', abrirDrawer);
+  document.getElementById('drawerOverlay').addEventListener('click', cerrarDrawer);
+
+  // Drawer Bienvenido
+  document.getElementById('menuContactoBienvenido').addEventListener('click',()=>{ cerrarDrawer(); abrirModalContacto(); });
+
+  // Drawer Sub (Crear / Ingresar)
+  document.getElementById('menuInicio').addEventListener('click',()=>{ cerrarDrawer(); mostrarPantalla('screenOpciones'); });
+  document.getElementById('menuMiUsuario').addEventListener('click',()=>{ cerrarDrawer(); window.location.href='./mi-usuario.html'; });
+  document.getElementById('menuContactoSub').addEventListener('click',()=>{ cerrarDrawer(); abrirModalContacto(); });
+
+  // ── Escáner QR ───────────────────────────────────────────────────────────────
+  let scannedQRId = null;
+  let scanStream   = null;
+  let scanRafId    = null;
+
+  async function iniciarCamara(){
+    const video = document.getElementById('scanVideo');
+    try{
+      scanStream = await navigator.mediaDevices.getUserMedia({
+        video:{ facingMode:'environment', width:{ideal:640}, height:{ideal:640} }
+      });
+      video.srcObject = scanStream;
+      video.play();
+      scanRafId = requestAnimationFrame(tickScan);
+    }catch(e){
+      document.getElementById('scanErr').textContent = 'No se pudo acceder a la cámara. Verifica los permisos.';
+      document.getElementById('scanErr').style.display = 'block';
+    }
+  }
+
+  function detenerCamara(){
+    if(scanRafId){ cancelAnimationFrame(scanRafId); scanRafId=null; }
+    if(scanStream){ scanStream.getTracks().forEach(t=>t.stop()); scanStream=null; }
+  }
+
+  function tickScan(){
+    const video  = document.getElementById('scanVideo');
+    const okEl   = document.getElementById('scanOk');
+    const errEl  = document.getElementById('scanErr');
+    if(video.readyState !== video.HAVE_ENOUGH_DATA){ scanRafId=requestAnimationFrame(tickScan); return; }
+    const canvas = document.createElement('canvas');
+    canvas.width  = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video,0,0);
+    const img  = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height);
+    const code = jsQR(img.data, img.width, img.height, {inversionAttempts:'dontInvert'});
+    if(code){
+      // Extraer el id del parámetro ?id= si es una URL de TuQR, o usar el texto crudo
+      let qrId = code.data.trim();
+      try{
+        const u = new URL(qrId);
+        const p = u.searchParams.get('id');
+        if(p) qrId = p.trim();
+      }catch(_){}
+      detenerCamara();
+      scannedQRId = qrId;
+      okEl.textContent = '✓ QR capturado: ' + qrId;
+      okEl.style.display = 'block';
+      errEl.style.display = 'none';
+      document.getElementById('btnUsarQR').style.display = 'block';
+      return; // no seguir haciendo frames
+    }
+    scanRafId = requestAnimationFrame(tickScan);
+  }
+
+  document.getElementById('btnUsarQR').addEventListener('click', async ()=>{
+    if(!scannedQRId) return;
+    // Verificar que el QR no esté ya asignado en data.json
+    const btn = document.getElementById('btnUsarQR');
+    btn.textContent = 'Verificando…'; btn.disabled = true;
+    try{
+      const res = await fetch(DATA_URL+'?ts='+Date.now(),{cache:'no-store'});
+      const all = await res.json();
+      if(all[scannedQRId]){
+        document.getElementById('scanErr').textContent = '✗ Este QR ya está asignado a otro usuario.';
+        document.getElementById('scanErr').style.display = 'block';
+        document.getElementById('scanOk').style.display = 'none';
+        scannedQRId = null;
+        btn.textContent = 'Usar este QR →'; btn.disabled = false;
+        // Reiniciar cámara para escanear otro
+        document.getElementById('btnUsarQR').style.display = 'none';
+        iniciarCamara();
+        return;
+      }
+    }catch(e){
+      document.getElementById('scanErr').textContent = 'Error al verificar. Intenta de nuevo.';
+      document.getElementById('scanErr').style.display = 'block';
+      btn.textContent = 'Usar este QR →'; btn.disabled = false;
+      return;
+    }
+    // QR libre — ir al formulario
+    btn.textContent = 'Usar este QR →'; btn.disabled = false;
+    document.getElementById('consentCheck').checked = false;
+    document.getElementById('err-consent').classList.remove('show');
+    mostrarPantalla('screenCrear');
+  });
+
+  // ── Utilidades ────────────────────────────────────────────────────────────
+  function val(id){ return (document.getElementById(id).value||'').trim(); }
+  function clean(s){ return String(s??'').normalize('NFC').replace(/\u00A0/g,' ').replace(/[\u200B-\u200F]/g,'').trim(); }
+  function validarRut(rut){
+    const r=rut.replace(/[\.\-\s]/g,'').toUpperCase();
+    if(!/^\d{7,8}[0-9K]$/.test(r)) return false;
+    const cuerpo=r.slice(0,-1), dv=r.slice(-1);
+    let suma=0, mul=2;
+    for(let i=cuerpo.length-1;i>=0;i--){ suma+=parseInt(cuerpo[i])*mul; mul=mul===7?2:mul+1; }
+    const dvE=11-(suma%11);
+    return dv===(dvE===11?'0':dvE===10?'K':String(dvE));
+  }
+  function formatearRut(rut){
+    const r=rut.replace(/[\.\-\s]/g,'');
+    if(r.length<2) return r;
+    return r.slice(0,-1).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+'-'+r.slice(-1);
+  }
+  function normalizarRut(rut){ return rut.replace(/[\.\-\s]/g,'').toUpperCase(); }
+  function validarEmail(e){ return e.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
+  function validarTel(t){ return /^9\d{8}$/.test(t.replace(/\s/g,'')); }
+  function generarIdCuenta(rut, banco, numeroCuenta){
+    return normalizarRut(rut)+'_'+banco.replace(/\s+/g,'')+'_'+numeroCuenta;
+  }
+
+  // ── Polling ───────────────────────────────────────────────────────────────
+  let pollTimer=null, pollCount=0;
+  function iniciarPolling(id){
+    pollCount=0; clearInterval(pollTimer); checkId(id);
+    pollTimer=setInterval(()=>checkId(id), POLL_INTERVAL);
+  }
+  async function checkId(id){
+    pollCount++;
+    try{
+      const res=await fetch(DATA_URL+'?ts='+Date.now(),{cache:'no-store'});
+      if(!res.ok) throw new Error();
+      const all=await res.json();
+      if(all[id]){ clearInterval(pollTimer); window.location.replace('./app.html'); return; }
+    }catch(e){}
+    if(pollCount>=POLL_MAX){
+      clearInterval(pollTimer);
+      document.getElementById('waitBox').style.display='none';
+      document.getElementById('msgQRError').style.display='flex';
+    }
+  }
+
+  // ── Navegación ────────────────────────────────────────────────────────────
+  document.getElementById('btnIrCrear').addEventListener('click',()=>{
+    scannedQRId = null;
+    document.getElementById('scanOk').style.display = 'none';
+    document.getElementById('scanErr').style.display = 'none';
+    document.getElementById('btnUsarQR').style.display = 'none';
+    mostrarPantalla('screenEscanear');
+    iniciarCamara();
+  });
+  document.getElementById('backFromEscanear').addEventListener('click',()=>{
+    detenerCamara();
+    mostrarPantalla('screenOpciones');
+  });
+  document.getElementById('btnIrActivar').addEventListener('click',()=>{ mostrarPantalla('screenActivar'); });
+  document.getElementById('backFromActivar').addEventListener('click',()=>{ mostrarPantalla('screenOpciones'); });
+  document.getElementById('backFromCrear').addEventListener('click',()=>{
+    detenerCamara();
+    scannedQRId = null;
+    mostrarPantalla('screenOpciones');
+  });
+
+  // ── Ingresar ──────────────────────────────────────────────────────────────
+  const actRutInput=document.getElementById('actRut');
+  const actTelInput=document.getElementById('actTel');
+
+  actRutInput.addEventListener('input',function(){
+    const raw=this.value.replace(/[\.\-\s]/g,'');
+    if(raw.length>=2) this.value=formatearRut(raw);
+    const ok=validarRut(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-actRut').classList.toggle('show',this.value.length>0&&!ok);
+    document.getElementById('err-actGeneral').classList.remove('show');
+  });
+  actTelInput.addEventListener('input',function(){
+    this.value=this.value.replace(/\D/g,'');
+    const ok=validarTel(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-actTel').classList.toggle('show',this.value.length>0&&!ok);
+  });
+
+  document.getElementById('btnDoActivar').addEventListener('click',async function(){
+    const rutVal=actRutInput.value.trim(), telVal=actTelInput.value.replace(/\D/g,'');
+    const errGen=document.getElementById('err-actGeneral');
+    errGen.classList.remove('show');
+    if(!validarRut(rutVal)){ actRutInput.classList.add('invalid'); document.getElementById('err-actRut').classList.add('show'); return; }
+    if(!validarTel(telVal)){ actTelInput.classList.add('invalid'); document.getElementById('err-actTel').classList.add('show'); return; }
+    this.textContent='Verificando…'; this.disabled=true;
+    try{
+      const res=await fetch(DATA_URL+'?ts='+Date.now(),{cache:'no-store'});
+      const all=await res.json();
+      const rutNorm=normalizarRut(rutVal);
+      const matches=Object.entries(all).filter(([id,d])=>
+        normalizarRut(d.rut||'')===rutNorm&&(d.telefono||'').replace(/\D/g,'')===telVal
+      );
+      if(matches.length===0){ errGen.classList.add('show'); this.textContent='Continuar'; this.disabled=false; }
+      else{ localStorage.setItem(STORAGE_KEY,matches[0][0]); window.location.replace('./app.html'); }
+    }catch(e){
+      errGen.textContent='Error al conectar. Intenta de nuevo.';
+      errGen.classList.add('show'); this.textContent='Continuar'; this.disabled=false;
+    }
+  });
+
+  // ── Crear usuario ─────────────────────────────────────────────────────────
+  const rutInput     = document.getElementById('rut');
+  const cuentaInput  = document.getElementById('numeroCuenta');
+  const correoInput  = document.getElementById('correo');
+  const telInput     = document.getElementById('telefono');
+
+  rutInput.addEventListener('input',function(){
+    const raw=this.value.replace(/[\.\-\s]/g,'');
+    if(raw.length>=2) this.value=formatearRut(raw);
+    const ok=validarRut(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-rut').classList.toggle('show',this.value.length>0&&!ok);
+  });
+  cuentaInput.addEventListener('input',function(){
+    this.value=this.value.replace(/\D/g,'');
+    this.classList.toggle('valid',this.value.length>0);
+    document.getElementById('err-cuenta').classList.remove('show');
+  });
+  correoInput.addEventListener('blur',function(){
+    const ok=validarEmail(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-correo').classList.toggle('show',this.value.length>0&&!ok);
+  });
+  telInput.addEventListener('input',function(){
+    this.value=this.value.replace(/\D/g,'');
+    const ok=validarTel(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-tel').classList.toggle('show',this.value.length>0&&!ok);
+  });
+
+  // ── Política de Privacidad: abrir/cerrar modal ───────────────────────────
+  document.getElementById('linkPrivacidad').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('modalPrivacidad').classList.add('open');
+  });
+  document.getElementById('btnCerrarPrivacidad').addEventListener('click',()=>{
+    document.getElementById('modalPrivacidad').classList.remove('open');
+  });
+  document.getElementById('modalPrivacidad').addEventListener('click',function(e){
+    if(e.target===this) this.classList.remove('open');
+  });
+  // Marcar checkbox automáticamente al cerrar si el usuario llegó al final del modal
+  document.getElementById('modalPrivacidad').querySelector('.privacy-modal-box')
+    .addEventListener('scroll', function(){
+      if(this.scrollTop + this.clientHeight >= this.scrollHeight - 20){
+        document.getElementById('consentCheck').checked = true;
+        document.getElementById('err-consent').classList.remove('show');
+      }
+    });
+
+  document.getElementById('save').addEventListener('click',async()=>{
+    const msgErr=document.getElementById('msg-err');
+    msgErr.innerHTML='';
+
+    // ── Validar consentimiento antes de cualquier otra cosa ───────────────
+    const consentCheck = document.getElementById('consentCheck');
+    if(!consentCheck.checked){
+      document.getElementById('err-consent').classList.add('show');
+      consentCheck.focus();
+      return;
+    }
+    document.getElementById('err-consent').classList.remove('show');
+
+    const nombre       = clean(val('nombre'));
+    const rut          = clean(val('rut'));
+    const telefono     = val('telefono').replace(/\D/g,'');
+    const correo       = clean(val('correo'));
+    const banco        = clean(val('banco'));
+    const tipoCuenta   = clean(val('tipoCuenta'));
+    const numeroCuenta = clean(val('numeroCuenta'));
+
+    if(!nombre||!rut||!banco||!tipoCuenta||!numeroCuenta){
+      msgErr.innerHTML='<div class="err">Faltan campos obligatorios.</div>'; return;
+    }
+    if(!validarRut(rut)){ msgErr.innerHTML='<div class="err">El RUT no es válido.</div>'; rutInput.focus(); return; }
+    if(!validarTel(telefono)){ msgErr.innerHTML='<div class="err">El teléfono debe tener 9 dígitos y comenzar en 9.</div>'; telInput.focus(); return; }
+    if(!validarEmail(correo)){ msgErr.innerHTML='<div class="err">Ingresa un correo válido.</div>'; correoInput.focus(); return; }
+    if(!/^\d+$/.test(numeroCuenta)){ msgErr.innerHTML='<div class="err">El número de cuenta debe ser solo dígitos.</div>'; cuentaInput.focus(); return; }
+
+    // ID = QR escaneado (UUID pre-generado)
+    if(!scannedQRId){
+      msgErr.innerHTML='<div class="err">No hay QR escaneado. Vuelve atrás y escanea un QR.</div>'; return;
+    }
+    const autoId  = scannedQRId;
+    const rutNorm = normalizarRut(rut);
+
+    let all = {};
+    try{
+      const chk=await fetch(DATA_URL+'?ts='+Date.now(),{cache:'no-store'});
+      all=await chk.json();
+    }catch(e){
+      msgErr.innerHTML='<div class="err">No se pudo verificar disponibilidad. Intenta de nuevo.</div>'; return;
+    }
+
+    // ¿Ya existe algún registro con ese RUT? → avisar
+    const rutExiste = Object.values(all).some(d => normalizarRut(d.rut||'') === rutNorm);
+    if(rutExiste){
+      msgErr.innerHTML=`<div class="warn">⚠️ Ya existe un usuario con ese RUT.<br>
+        Si es tu cuenta, <a id="linkIrInicio">ve a Inicio e Ingresa</a> con tu RUT y teléfono.</div>`;
+      document.getElementById('linkIrInicio').addEventListener('click',()=>{ msgErr.innerHTML=''; mostrarPantalla('screenOpciones'); });
+      return;
+    }
+
+    if(all[autoId]){
+      msgErr.innerHTML='<div class="err">Este QR ya está asignado. Vuelve atrás y escanea otro.</div>'; return;
+    }
+
+    // ── Objeto de consentimiento (Ley 19.628 / RGPD) ────────────────────────
+    // NOTA FUTURA: cuando exista API de consentimiento, enviar consentRecord
+    // a un endpoint dedicado ANTES de crear el usuario, ej:
+    //   await fetch(CONSENT_API_URL, { method:'POST', body: JSON.stringify(consentRecord) })
+    // La IP real y country deben ser inyectadas por el Worker desde el header CF-Connecting-IP
+    const consentRecord = {
+      user_id:        autoId,            // ID de la cuenta destino creada
+      policy_version: "PP-2026-03-01-v1",
+      consent_type:   "account_creation",
+      accepted:       true,
+      accepted_at:    new Date().toISOString(),
+      ip_address:     null,              // TODO: inyectar desde Worker (CF-Connecting-IP)
+      user_agent:     navigator.userAgent,
+      source:         "web",
+      country:        "CL",             // TODO: obtener desde Worker o Cloudflare geo header
+      legal_basis:    "consent"
+    };
+
+    const payload={
+      id:autoId, nombre, rut, banco, tipoCuenta, numeroCuenta, correo, telefono,
+      consent: consentRecord  // se almacena junto al registro del usuario
+    };
+
+    try{
+      const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const txt=await res.text(); let data={};
+      try{ data=JSON.parse(txt); }catch{}
+      if(!res.ok||!data.ok){
+        const detail=data.error?('\nDetalle: '+data.error):('\nHTTP '+res.status+'\n'+txt);
+        msgErr.innerHTML='<div class="err">Error guardando.'+detail+'</div>'; return;
+      }
+      localStorage.setItem(STORAGE_KEY,autoId);
+      document.getElementById('resNombre').textContent=nombre;
+      document.getElementById('waitBox').style.display='flex';
+      document.getElementById('msgQRError').style.display='none';
+      mostrarPantalla('screenCreado');
+      window.scrollTo({top:0,behavior:'smooth'});
+      iniciarPolling(autoId);
+    }catch(e){ msgErr.innerHTML='<div class="err">Fallo de red: '+e+'</div>'; }
+  });
+
+  document.getElementById('btnIrApp').addEventListener('click',()=>{ window.location.replace('./app.html'); });
+  document.getElementById('btnReintentar').addEventListener('click',()=>{
+    document.getElementById('waitBox').style.display='flex';
+    document.getElementById('msgQRError').style.display='none';
+    const id=localStorage.getItem(STORAGE_KEY); if(id) iniciarPolling(id);
+  });
+
+  // ── Modal Contacto ────────────────────────────────────────────────────────
+  let dataJson=null;
+  async function cargarDataJson(){
+    if(dataJson) return dataJson;
+    try{ const res=await fetch(DATA_URL+'?ts='+Date.now(),{cache:'no-store'}); dataJson=await res.json(); }
+    catch(e){ dataJson={}; }
+    return dataJson;
+  }
+  async function abrirModalContacto(){
+    document.getElementById('modalContacto').classList.add('open');
+    document.getElementById('cRut').value='';
+    document.getElementById('cCuentaDestino').innerHTML='<option value="">— Selecciona —</option>';
+    document.getElementById('cTipo').value='';
+    document.getElementById('cMensaje').value='';
+    document.getElementById('charCount').textContent='0';
+    document.getElementById('msg-contacto-err').innerHTML='';
+    document.getElementById('btnEnviarContacto').textContent='Enviar';
+    document.getElementById('btnEnviarContacto').disabled=false;
+    ['err-cRut','err-cCuentaDestino','err-cTipo','err-cMensaje'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  }
+  function cerrarModal(){ document.getElementById('modalContacto').classList.remove('open'); }
+  document.getElementById('btnCerrarModal').addEventListener('click',cerrarModal);
+  document.getElementById('modalContacto').addEventListener('click',function(e){ if(e.target===this) cerrarModal(); });
+
+  document.getElementById('cRut').addEventListener('input',async function(){
+    const raw=this.value.replace(/[\.\-\s]/g,'');
+    if(raw.length>=2) this.value=formatearRut(raw);
+    const ok=validarRut(this.value);
+    this.classList.toggle('valid',this.value.length>0&&ok);
+    this.classList.toggle('invalid',this.value.length>0&&!ok);
+    document.getElementById('err-cRut').classList.toggle('show',this.value.length>0&&!ok);
+    const sel=document.getElementById('cCuentaDestino');
+    sel.innerHTML='<option value="">— Selecciona —</option>';
+    if(ok){
+      const all=await cargarDataJson();
+      const rutNorm=normalizarRut(this.value);
+      Object.entries(all).forEach(([id,d])=>{
+        if(normalizarRut(d.rut||'')===rutNorm){
+          const opt=document.createElement('option');
+          opt.value=id; opt.textContent=`${clean(d.banco)} · ${clean(d.tipoCuenta)} · N°${clean(d.numeroCuenta)}`;
+          sel.appendChild(opt);
+        }
+      });
+    }
+  });
+  document.getElementById('cMensaje').addEventListener('input',function(){ document.getElementById('charCount').textContent=this.value.length; });
+  document.getElementById('btnEnviarContacto').addEventListener('click',async function(){
+    const msgErr=document.getElementById('msg-contacto-err');
+    msgErr.innerHTML=''; let ok=true;
+    const rut=val('cRut'), cuentaDestino=val('cCuentaDestino'), tipo=val('cTipo'), mensaje=val('cMensaje');
+    if(!validarRut(rut)){document.getElementById('err-cRut').classList.add('show');ok=false;}
+    if(!cuentaDestino){document.getElementById('err-cCuentaDestino').classList.add('show');ok=false;}
+    if(!tipo){document.getElementById('err-cTipo').classList.add('show');ok=false;}
+    if(mensaje.length<10){document.getElementById('err-cMensaje').classList.add('show');ok=false;}
+    if(!ok) return;
+    this.textContent='Enviando…'; this.disabled=true;
+    const all=await cargarDataJson();
+    const userData=all[cuentaDestino]||{};
+    try{
+      await emailjs.send('service_pbr7qdo','template_emm0576',{
+        from_name:clean(userData.nombre||cuentaDestino), rut, usuario:cuentaDestino,
+        tipo_problema:tipo, mensaje, reply_to:userData.correo||'sin-correo@tuqr.app'
+      });
+      msgErr.innerHTML='<div style="color:#0a7;font-weight:700;margin-top:10px;">✓ Mensaje enviado. Te responderemos pronto.</div>';
+      this.textContent='Enviado ✓';
+    }catch(e){
+      msgErr.innerHTML='<div class="err">Error al enviar. Intenta de nuevo.</div>';
+      this.textContent='Enviar'; this.disabled=false;
+    }
+  });
+  // ── Modal Compartir la app ─────────────────────────────────────────────
+  let compartirQRHecho=false;
+  function abrirModalCompartir(){
+    document.getElementById('modalCompartir').classList.add('open');
+    if(!compartirQRHecho){
+      compartirQRHecho=true;
+      const container=document.getElementById('compartirQRContainer');
+      container.innerHTML='';
+      new QRCode(container,{text:'https://tuqrapp.github.io/tuqr.github.io/welcome.html',width:208,height:208,correctLevel:QRCode.CorrectLevel.M});
+    }
+  }
+  function copyTextSimple(t){
+    if(navigator.clipboard&&navigator.clipboard.writeText) return navigator.clipboard.writeText(t).then(()=>true).catch(()=>false);
+    try{ const ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); const ok=document.execCommand('copy'); document.body.removeChild(ta); return Promise.resolve(ok); }catch(_){return Promise.resolve(false);}
+  }
+  document.getElementById('btnCerrarCompartir').addEventListener('click',()=>{ document.getElementById('modalCompartir').classList.remove('open'); });
+  document.getElementById('modalCompartir').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
+  document.getElementById('compartirCopyBtn').addEventListener('click',function(){
+    copyTextSimple(document.getElementById('compartirLinkInput').value).then(()=>{
+      const ok=document.getElementById('compartirCopyOk');
+      this.textContent='✓ Copiado'; ok.style.display='block';
+      setTimeout(()=>{ this.textContent='Copiar'; ok.style.display='none'; },2000);
+    });
+  });
+  document.getElementById('menuCompartirBienvenido').addEventListener('click',()=>{ cerrarDrawer(); abrirModalCompartir(); });
+  document.getElementById('menuCompartirSub').addEventListener('click',()=>{ cerrarDrawer(); abrirModalCompartir(); });
+
+</script>
+</body>
+</html>
