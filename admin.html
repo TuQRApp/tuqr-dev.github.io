@@ -362,7 +362,29 @@
       </button>
     </div>
   </div>
-
+<!-- Elegir tipo de QR -->
+  <div id="screenTipoQR" class="card" style="display:none">
+    <h1>¿Cómo es tu QR?</h1>
+    <p class="sub">Elige según el QR que tienes o quieres usar.</p>
+    <div class="opciones">
+      <button class="btn-opcion primary" id="btnTieneQR">
+        <div class="icon">🖨️</div>
+        <div class="label">
+          <strong>Tengo un QR impreso</strong>
+          <span>Escanea el QR físico para asignarlo</span>
+        </div>
+      </button>
+      <button class="btn-opcion secondary" id="btnQRDigital">
+        <div class="icon">📱</div>
+        <div class="label">
+          <strong>Generar QR digital en mi app</strong>
+          <span>El QR vivirá solo en la app</span>
+        </div>
+      </button>
+    </div>
+    <button class="link-back" id="backFromTipoQR">← Volver</button>
+  </div>
+  
   <!-- Ingresar -->
   <div id="screenActivar" class="card" style="display:none">
     <h1>Ingresar</h1>
@@ -629,7 +651,7 @@
   let pantallaActual = 'screenOpciones';
 
   function mostrarPantalla(id){
-    ['screenOpciones','screenActivar','screenEscanear','screenCrear','screenCreado'].forEach(s=>{
+   ['screenOpciones','screenTipoQR','screenActivar','screenEscanear','screenCrear','screenCreado'].forEach(s=>{
       document.getElementById(s).style.display = s===id ? '' : 'none';
     });
     pantallaActual = id;
@@ -810,7 +832,11 @@
   }
 
   // ── Navegación ────────────────────────────────────────────────────────────
-  document.getElementById('btnIrCrear').addEventListener('click',()=>{
+document.getElementById('btnIrCrear').addEventListener('click',()=>{
+    mostrarPantalla('screenTipoQR');
+  });
+
+  document.getElementById('btnTieneQR').addEventListener('click',()=>{
     scannedQRId = null;
     document.getElementById('scanOk').style.display = 'none';
     document.getElementById('scanErr').style.display = 'none';
@@ -818,9 +844,20 @@
     mostrarPantalla('screenEscanear');
     iniciarCamara();
   });
-  document.getElementById('backFromEscanear').addEventListener('click',()=>{
-    detenerCamara();
+
+  document.getElementById('btnQRDigital').addEventListener('click',()=>{
+    scannedQRId = 'digital_'+crypto.randomUUID();
+    document.getElementById('consentCheck').checked = false;
+    document.getElementById('err-consent').classList.remove('show');
+    mostrarPantalla('screenCrear');
+  });
+
+  document.getElementById('backFromTipoQR').addEventListener('click',()=>{
     mostrarPantalla('screenOpciones');
+  });
+document.getElementById('backFromEscanear').addEventListener('click',()=>{
+    detenerCamara();
+    mostrarPantalla('screenTipoQR');
   });
   document.getElementById('btnIrActivar').addEventListener('click',()=>{ mostrarPantalla('screenActivar'); });
   document.getElementById('backFromActivar').addEventListener('click',()=>{ mostrarPantalla('screenOpciones'); });
