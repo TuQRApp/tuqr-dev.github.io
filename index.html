@@ -191,24 +191,7 @@ function buildText(d){
 }
 
 async function copyText(text){
-  const payload = text
-    .replace(/\r\n/g, '\n').replace(/\r/g, '\n')
-    .replace(/\u00B0/g, '')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[ \t]+$/gm, '')
-    .trim();
-
-if(navigator.clipboard && window.ClipboardItem){
-    try{
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          'text/plain': new Blob([payload], { type: 'text/plain' })
-        })
-      ]);
-      return true;
-    }catch(_){}
-  }
+  const payload = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/[ \t]+$/gm, '').trim();
 
   if(navigator.clipboard && navigator.clipboard.writeText){
     try{ await navigator.clipboard.writeText(payload); return true; }catch(_){}
