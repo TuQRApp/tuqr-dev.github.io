@@ -199,16 +199,11 @@ async function copyText(text){
     .replace(/[ \t]+$/gm, '')
     .trim();
 
-  const payloadHtml = '<div>' +
-    payload.split('\n').map(l => l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')).join('</div><div>') +
-    '</div>';
-
-  if(navigator.clipboard && window.ClipboardItem){
+if(navigator.clipboard && window.ClipboardItem){
     try{
       await navigator.clipboard.write([
         new ClipboardItem({
-          'text/plain': new Blob([payload],     { type: 'text/plain' }),
-          'text/html':  new Blob([payloadHtml], { type: 'text/html'  })
+          'text/plain': new Blob([payload], { type: 'text/plain' })
         })
       ]);
       return true;
