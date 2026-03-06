@@ -25,5 +25,14 @@
     "numeroCuenta": "987098710973",
     "correo": "nestragues@gmail.com",
     "telefono": "982897919"
+  },
+  "digital_279364aa-d0ae-464c-b9ca-ec95a08b7a18": {
+    "banco": "Banco Santander",
+    "rut": "23.182.071-k",
+    "nombre": "Nicolás Estragues",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "212184",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919"
   }
 }
