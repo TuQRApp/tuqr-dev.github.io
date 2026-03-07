@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>TuQR — POC21 al POC30 — 5 hojas</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff7a18;
+    --accent:  #ffd400;
+    --text:    #1a1a1a;
+    --muted:   #5a5a5a;
+    --border:  rgba(0,0,0,.10);
+    --shadow:  0 4px 16px rgba(0,0,0,.10);
+    --radius:  12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #fff;
+  }
+  .sheet {
+    width: 279mm; height: 216mm;
+    display: flex; flex-direction: row;
+    overflow: hidden; background: #fff;
+  }
+  .cut-line {
+    width: 1px; flex-shrink: 0;
+    background: repeating-linear-gradient(to bottom,#ccc 0,#ccc 5px,transparent 5px,transparent 10px);
+    position: relative; align-self: stretch;
+  }
+  .cut-line::before { display: none; }
+  .lamina {
+    width: 139.5mm; height: 216mm;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .top-dead-zone {
+    flex-shrink: 0;
+    height: 15%;
+    background: #fff;
+    border-bottom: 1px dashed #ccc;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cut-hint { display: none; }
+  .live-area {
+    flex: 1; min-height: 0;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .top-bar {
+    height: 6px; flex-shrink: 0;
+    background: linear-gradient(90deg,#ffd400,#ff7a18);
+  }
+  .logo-header {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4px 0 3px;
+  }
+  .logo-header img {
+    width: 22%;
+    height: auto;
+    object-fit: contain;
+  }
+  .logo-placeholder {
+    width: 22%;
+    height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,212,0,.15);
+    border-radius: 6px;
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    letter-spacing: .5px;
+  }
+  .hero {
+    flex-shrink: 0; margin: 4px 10px 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .hero .dot { display: none; }
+  .hero-line1 {
+    font-size: 15.75px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .2px; color: var(--muted); line-height: 1.3;
+  }
+  .hero-line2 { display: none; }
+  .process-inline {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    width: 95%; gap: 0;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .process-inline .process-step {
+    font-size: 12.47px; font-weight: 400; color: var(--text);
+    text-transform: uppercase; letter-spacing: .1px;
+    text-align: center; flex: 1;
+    line-height: 1.3;
+  }
+  .process-inline .process-arrow {
+    font-size: 18px; font-weight: 900;
+    color: var(--primary);
+    flex-shrink: 0; padding: 0 2px;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(255,122,24,.35);
+  }
+  .qr-card {
+    flex-shrink: 0;
+    width: calc(100% - 20px);
+    aspect-ratio: 1 / 1;
+    margin: 0 10px;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 6px 10px 8px;
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .qr-card::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background: linear-gradient(90deg,#ffd400,#ff7a18);
+  }
+  .qr-top {
+    flex: 1; min-height: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .qr-frame {
+    position: relative; width: 252px; height: 252px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .corner {
+    position: absolute; width: 24px; height: 24px;
+    border-color: var(--primary); border-style: solid;
+  }
+  .tl { top:0; left:0;  border-width:4px 0 0 4px; border-radius:4px 0 0 0; }
+  .tr { top:0; right:0; border-width:4px 4px 0 0; border-radius:0 4px 0 0; }
+  .bl { bottom:0; left:0;  border-width:0 0 4px 4px; border-radius:0 0 0 4px; }
+  .br { bottom:0; right:0; border-width:0 4px 4px 0; border-radius:0 0 4px 0; }
+  .qr-svg-wrap {
+    width:236px; height:236px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .qr-svg-wrap svg { width:236px !important; height:236px !important; }
+  .qr-id {
+    font-size: 8px; font-weight: 700; color: var(--muted);
+    letter-spacing: .5px; text-align: center;
+    font-family: 'Courier New', monospace;
+    line-height: 1; margin-top: 2px;
+  }
+  .fields-wrap {
+    flex-shrink: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 6px 0 12px;
+    margin-top: 4px;
+  }
+  .field-row {
+    display: flex; align-items: baseline;
+    justify-content: center; gap: 4px;
+    flex-wrap: nowrap; white-space: nowrap;
+  }
+  .field-label {
+    font-size: 12.6px; font-weight: 700; color: var(--text);
+  }
+  .field-ul {
+    font-size: 12.6px; color: var(--text);
+    letter-spacing: 0px; line-height: 1;
+    border-bottom: 1px solid var(--text);
+    display: inline-block;
+  }
+  .ul-30 { width: calc(30 * 6.16px); }
+  .ul-15 { width: calc(15 * 5.6px); }
+  .ul-18 { width: calc(18 * 4.99px); }
+  .ul-12 { width: calc(12 * 4.99px); }
+  .process-card { display: none; }
+  .process-row { display: none; }
+  .pills {
+    flex-shrink:0; margin:5px 10px 0; display:flex; gap:5px;
+  }
+  .pill {
+    flex:1; display:flex; align-items:center; justify-content:center; gap:4px;
+    background:#fff; border:1.5px solid rgba(255,212,0,.6); border-radius:999px;
+    padding:4px 4px; font-size:10px; font-weight:700; color:var(--text);
+    box-shadow:0 2px 5px rgba(0,0,0,.06);
+  }
+  .pill-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .bottom-bar {
+    flex-shrink:0; height:6px; margin-top:5px;
+    background:linear-gradient(90deg,#ffd400,#ff7a18);
+  }
+  @media screen {
+    body { display:flex; flex-direction:column; align-items:center; padding:30px; gap:20px; background:#888; }
+    .sheet { box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  }
+  .qr-render { width:236px; height:236px; display:flex; align-items:center; justify-content:center; }
+  .qr-render img, .qr-render canvas { width:236px !important; height:236px !important; }
+  @media print {
+    @page { size: 279mm 216mm landscape; margin: 0; }
+    html, body { margin: 0; padding: 0; background: white; }
+    body { display: block; }
+    .sheet {
+      width: 279mm; height: 216mm;
+      page-break-before: always;
+      page-break-after: always;
+      page-break-inside: avoid;
+      break-before: page;
+      break-after: page;
+      break-inside: avoid;
+      overflow: hidden;
+      box-shadow: none;
+    }
+    .sheet:first-child {
+      page-break-before: avoid;
+      break-before: avoid;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-01" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC21</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-02" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC22</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-03" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC23</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-04" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC24</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-05" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC25</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-06" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC26</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-07" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC27</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-08" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC28</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-09" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC29</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">&#10140;</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-10" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC30</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>&#128274; Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>&#9889; Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>&#9989; Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+window.addEventListener('load', function() {
+  new QRCode(document.getElementById('qr-01'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=85486038-9a46-4f65-9422-3d403ff002d4',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-02'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=78454c6b-7049-4399-aa84-98ad6e35602d',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-03'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=c04cc669-109b-4f01-b4ba-d7a1ba393d39',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-04'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=e731c00d-8565-4372-9463-21df517b88ad',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-05'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=5618d1c2-ff58-4abf-92ce-348717ddcab8',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-06'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=e4762f66-b29f-470b-8dc1-bf94f8406a3c',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-07'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=49c7cc62-16f5-4a45-b08a-114d66b9d617',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-08'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=79d10274-a630-4104-beef-36899a1dcb4f',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-09'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=df72fffb-70e4-4aee-adc9-ef08076a751f',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-10'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=08a28f1e-509d-4914-bcb3-833984d90646',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+});
+</script>
+</body>
+</html>
