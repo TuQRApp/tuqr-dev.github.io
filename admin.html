@@ -88,12 +88,12 @@
   .btn-opcion .label strong{ font-size:15px; font-weight:800; }
   .btn-opcion .label span{ font-size:12px; font-weight:500; color:var(--muted); }
   label{ font-weight:700; font-size:13px; color:var(--muted); margin-top:14px; display:block; margin-bottom:5px; }
-  input, select{
+  input, select, textarea{
     width:100%; padding:11px 12px; font-size:14px; font-family:inherit;
     border:1.5px solid rgba(0,0,0,.12); border-radius:12px; background:#fff; color:var(--text);
     outline:none; transition:border-color .15s, box-shadow .15s; -webkit-appearance:none; appearance:none;
   }
-  input:focus, select:focus{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(255,122,24,.12); }
+  input:focus, select:focus, textarea:focus{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(255,122,24,.12); }
   input.invalid{ border-color:#e00; background:#fff8f8; }
   input.valid{ border-color:#0a7; background:#f5fbf8; }
   .field-err{ color:#c00; font-size:12px; font-weight:600; margin-top:4px; display:none; }
@@ -198,7 +198,7 @@
   .compartir-link-wrap{ display:flex; gap:8px; align-items:center; margin-top:4px; }
   .compartir-link-input{ flex:1; padding:10px 12px; font-size:12px; font-family:inherit; border:1.5px solid rgba(0,0,0,.12); border-radius:10px; background:#f7f7f7; color:var(--muted); outline:none; }
   .compartir-copy-btn{ padding:10px 14px; font-size:12px; font-weight:800; font-family:inherit; border:1.5px solid var(--primary); border-radius:10px; color:var(--primary); background:#fff; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-    .compartir-seccion-label{ font-size:16px; font-weight:400; color:var(--text); margin:4px 0 14px; text-align:center; line-height:1.3; }
+  .compartir-seccion-label{ font-size:16px; font-weight:400; color:var(--text); margin:4px 0 14px; text-align:center; line-height:1.3; }
   .compartir-separador{ font-size:20px; font-weight:800; color:var(--primary); text-align:center; margin:22px 0; }
   .compartir-copy-ok{ font-size:12px; font-weight:700; color:#0a7; margin-top:6px; display:none; text-align:center; }
 
@@ -271,6 +271,13 @@
     margin-top:4px; display:none;
   }
   .consent-err.show{ display:block; }
+
+  /* Notas */
+  .notas-wrap{ margin-top:14px; }
+  .notas-wrap textarea{
+    min-height:72px; resize:vertical;
+  }
+  .notas-count{ font-size:11px; color:var(--muted); text-align:right; margin-top:3px; }
 
   /* Modal Política de Privacidad */
   .privacy-modal-overlay{
@@ -362,7 +369,8 @@
       </button>
     </div>
   </div>
-<!-- Elegir tipo de QR -->
+
+  <!-- Elegir tipo de QR -->
   <div id="screenTipoQR" class="card" style="display:none">
     <h1>¿Cómo es tu QR?</h1>
     <p class="sub">Elige según el QR que tienes o quieres usar.</p>
@@ -384,7 +392,7 @@
     </div>
     <button class="link-back" id="backFromTipoQR">← Volver</button>
   </div>
-  
+
   <!-- Ingresar -->
   <div id="screenActivar" class="card" style="display:none">
     <h1>Ingresar</h1>
@@ -418,7 +426,7 @@
     <button class="link-back" id="backFromEscanear">← Volver</button>
   </div>
 
-  <!-- Crear usuario: L1 Nombre / L2 RUT+Tel / L3 Correo / L4 Banco+Tipo / L5 Número -->
+  <!-- Crear usuario -->
   <div id="screenCrear" class="card" style="display:none">
     <h1>Crear usuario y cuenta de destino</h1>
 
@@ -469,6 +477,13 @@
     <label for="numeroCuenta">N° de cuenta</label>
     <input id="numeroCuenta" placeholder="Solo números" inputmode="numeric"/>
     <div class="field-err" id="err-cuenta">Solo números</div>
+
+    <!-- Notas libres — opcional -->
+    <div class="notas-wrap">
+      <label for="notas">Notas <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
+      <textarea id="notas" placeholder="Cualquier información adicional…" maxlength="500"></textarea>
+      <div class="notas-count"><span id="notasCount">0</span>/500</div>
+    </div>
 
     <!-- Consentimiento RGPD / Ley 19.628 -->
     <div class="consent-wrap">
@@ -539,7 +554,7 @@
   </div>
 </div>
 
-<!-- ══ Modal Compartir la app ══ -->
+<!-- Modal Compartir la app -->
 <div class="modal-overlay" id="modalCompartir">
   <div class="modal-box">
     <button class="modal-close" id="btnCerrarCompartir">✕</button>
@@ -556,10 +571,11 @@
     <div class="compartir-copy-ok" id="compartirCopyOk">✓ Link copiado</div>
   </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 
-<!-- ══ Modal Política de Privacidad ══ -->
+<!-- Modal Política de Privacidad -->
 <div class="privacy-modal-overlay" id="modalPrivacidad">
   <div class="privacy-modal-box">
     <button class="privacy-close-btn" id="btnCerrarPrivacidad">✕</button>
@@ -631,7 +647,6 @@
   </div>
 </div>
 
-
 <script>
   emailjs.init('yejdBOXVs6y3d8piR');
 
@@ -651,7 +666,7 @@
   let pantallaActual = 'screenOpciones';
 
   function mostrarPantalla(id){
-   ['screenOpciones','screenTipoQR','screenActivar','screenEscanear','screenCrear','screenCreado'].forEach(s=>{
+    ['screenOpciones','screenTipoQR','screenActivar','screenEscanear','screenCrear','screenCreado'].forEach(s=>{
       document.getElementById(s).style.display = s===id ? '' : 'none';
     });
     pantallaActual = id;
@@ -659,7 +674,6 @@
   }
 
   function sincronizarDrawers(){
-    // Mientras screenOpciones: drawer Bienvenido; en el resto: drawer Sub
     const esBienvenido = pantallaActual === 'screenOpciones';
     document.getElementById('drawerBienvenido').style.display = esBienvenido ? '' : 'none';
     document.getElementById('drawerSub').style.display        = esBienvenido ? 'none' : '';
@@ -690,15 +704,12 @@
   document.getElementById('btnHamburger').addEventListener('click', abrirDrawer);
   document.getElementById('drawerOverlay').addEventListener('click', cerrarDrawer);
 
-  // Drawer Bienvenido
   document.getElementById('menuContactoBienvenido').addEventListener('click',()=>{ cerrarDrawer(); abrirModalContacto(); });
-
-  // Drawer Sub (Crear / Ingresar)
   document.getElementById('menuInicio').addEventListener('click',()=>{ cerrarDrawer(); mostrarPantalla('screenOpciones'); });
   document.getElementById('menuMiUsuario').addEventListener('click',()=>{ cerrarDrawer(); window.location.href='./mi-usuario.html'; });
   document.getElementById('menuContactoSub').addEventListener('click',()=>{ cerrarDrawer(); abrirModalContacto(); });
 
-  // ── Escáner QR ───────────────────────────────────────────────────────────────
+  // ── Escáner QR ────────────────────────────────────────────────────────────
   let scannedQRId = null;
   let scanStream   = null;
   let scanRafId    = null;
@@ -735,7 +746,6 @@
     const img  = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height);
     const code = jsQR(img.data, img.width, img.height, {inversionAttempts:'dontInvert'});
     if(code){
-      // Extraer el id del parámetro ?id= si es una URL de TuQR, o usar el texto crudo
       let qrId = code.data.trim();
       try{
         const u = new URL(qrId);
@@ -748,14 +758,13 @@
       okEl.style.display = 'block';
       errEl.style.display = 'none';
       document.getElementById('btnUsarQR').style.display = 'block';
-      return; // no seguir haciendo frames
+      return;
     }
     scanRafId = requestAnimationFrame(tickScan);
   }
 
   document.getElementById('btnUsarQR').addEventListener('click', async ()=>{
     if(!scannedQRId) return;
-    // Verificar que el QR no esté ya asignado en data.json
     const btn = document.getElementById('btnUsarQR');
     btn.textContent = 'Verificando…'; btn.disabled = true;
     try{
@@ -767,23 +776,26 @@
         document.getElementById('scanOk').style.display = 'none';
         scannedQRId = null;
         btn.textContent = 'Usar este QR →'; btn.disabled = false;
-        // Reiniciar cámara para escanear otro
         document.getElementById('btnUsarQR').style.display = 'none';
         iniciarCamara();
         return;
       }
-   }catch(e){
-  console.error('btnUsarQR error:', e);
-  document.getElementById('scanErr').textContent = 'Error al verificar. Intenta de nuevo.';
+    }catch(e){
+      console.error('btnUsarQR error:', e);
+      document.getElementById('scanErr').textContent = 'Error al verificar. Intenta de nuevo.';
       document.getElementById('scanErr').style.display = 'block';
       btn.textContent = 'Usar este QR →'; btn.disabled = false;
       return;
     }
-    // QR libre — ir al formulario
     btn.textContent = 'Usar este QR →'; btn.disabled = false;
     document.getElementById('consentCheck').checked = false;
     document.getElementById('err-consent').classList.remove('show');
     mostrarPantalla('screenCrear');
+  });
+
+  // ── Notas: contador de caracteres ─────────────────────────────────────────
+  document.getElementById('notas').addEventListener('input', function(){
+    document.getElementById('notasCount').textContent = this.value.length;
   });
 
   // ── Utilidades ────────────────────────────────────────────────────────────
@@ -806,9 +818,6 @@
   function normalizarRut(rut){ return rut.replace(/[\.\-\s]/g,'').toUpperCase(); }
   function validarEmail(e){ return e.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
   function validarTel(t){ return /^9\d{8}$/.test(t.replace(/\s/g,'')); }
-  function generarIdCuenta(rut, banco, numeroCuenta){
-    return normalizarRut(rut)+'_'+banco.replace(/\s+/g,'')+'_'+numeroCuenta;
-  }
 
   // ── Polling ───────────────────────────────────────────────────────────────
   let pollTimer=null, pollCount=0;
@@ -832,10 +841,9 @@
   }
 
   // ── Navegación ────────────────────────────────────────────────────────────
-document.getElementById('btnIrCrear').addEventListener('click',()=>{
+  document.getElementById('btnIrCrear').addEventListener('click',()=>{
     mostrarPantalla('screenTipoQR');
   });
-
   document.getElementById('btnTieneQR').addEventListener('click',()=>{
     scannedQRId = null;
     document.getElementById('scanOk').style.display = 'none';
@@ -844,18 +852,16 @@ document.getElementById('btnIrCrear').addEventListener('click',()=>{
     mostrarPantalla('screenEscanear');
     iniciarCamara();
   });
-
   document.getElementById('btnQRDigital').addEventListener('click',()=>{
     scannedQRId = 'digital_'+crypto.randomUUID();
     document.getElementById('consentCheck').checked = false;
     document.getElementById('err-consent').classList.remove('show');
     mostrarPantalla('screenCrear');
   });
-
   document.getElementById('backFromTipoQR').addEventListener('click',()=>{
     mostrarPantalla('screenOpciones');
   });
-document.getElementById('backFromEscanear').addEventListener('click',()=>{
+  document.getElementById('backFromEscanear').addEventListener('click',()=>{
     detenerCamara();
     mostrarPantalla('screenTipoQR');
   });
@@ -943,7 +949,7 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
     document.getElementById('err-tel').classList.toggle('show',this.value.length>0&&!ok);
   });
 
-  // ── Política de Privacidad: abrir/cerrar modal ───────────────────────────
+  // ── Política de Privacidad ────────────────────────────────────────────────
   document.getElementById('linkPrivacidad').addEventListener('click', function(e){
     e.preventDefault();
     document.getElementById('modalPrivacidad').classList.add('open');
@@ -954,7 +960,6 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
   document.getElementById('modalPrivacidad').addEventListener('click',function(e){
     if(e.target===this) this.classList.remove('open');
   });
-  // Marcar checkbox automáticamente al cerrar si el usuario llegó al final del modal
   document.getElementById('modalPrivacidad').querySelector('.privacy-modal-box')
     .addEventListener('scroll', function(){
       if(this.scrollTop + this.clientHeight >= this.scrollHeight - 20){
@@ -963,11 +968,11 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
       }
     });
 
+  // ── Guardar usuario ───────────────────────────────────────────────────────
   document.getElementById('save').addEventListener('click',async()=>{
     const msgErr=document.getElementById('msg-err');
     msgErr.innerHTML='';
 
-    // ── Validar consentimiento antes de cualquier otra cosa ───────────────
     const consentCheck = document.getElementById('consentCheck');
     if(!consentCheck.checked){
       document.getElementById('err-consent').classList.add('show');
@@ -983,6 +988,7 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
     const banco        = clean(val('banco'));
     const tipoCuenta   = clean(val('tipoCuenta'));
     const numeroCuenta = clean(val('numeroCuenta'));
+    const notas        = clean(val('notas'));   // ← campo libre, opcional
 
     if(!nombre||!rut||!banco||!tipoCuenta||!numeroCuenta){
       msgErr.innerHTML='<div class="err">Faltan campos obligatorios.</div>'; return;
@@ -992,7 +998,6 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
     if(!validarEmail(correo)){ msgErr.innerHTML='<div class="err">Ingresa un correo válido.</div>'; correoInput.focus(); return; }
     if(!/^\d+$/.test(numeroCuenta)){ msgErr.innerHTML='<div class="err">El número de cuenta debe ser solo dígitos.</div>'; cuentaInput.focus(); return; }
 
-    // ID = QR escaneado (UUID pre-generado)
     if(!scannedQRId){
       msgErr.innerHTML='<div class="err">No hay QR escaneado. Vuelve atrás y escanea un QR.</div>'; return;
     }
@@ -1007,7 +1012,6 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
       msgErr.innerHTML='<div class="err">No se pudo verificar disponibilidad. Intenta de nuevo.</div>'; return;
     }
 
-    // ¿Ya existe algún registro con ese RUT? → avisar
     const rutExiste = Object.values(all).some(d => normalizarRut(d.rut||'') === rutNorm);
     if(rutExiste){
       msgErr.innerHTML=`<div class="warn">⚠️ Ya existe un usuario con ese RUT.<br>
@@ -1020,27 +1024,31 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
       msgErr.innerHTML='<div class="err">Este QR ya está asignado. Vuelve atrás y escanea otro.</div>'; return;
     }
 
-    // ── Objeto de consentimiento (Ley 19.628 / RGPD) ────────────────────────
-    // NOTA FUTURA: cuando exista API de consentimiento, enviar consentRecord
-    // a un endpoint dedicado ANTES de crear el usuario, ej:
-    //   await fetch(CONSENT_API_URL, { method:'POST', body: JSON.stringify(consentRecord) })
-    // La IP real y country deben ser inyectadas por el Worker desde el header CF-Connecting-IP
     const consentRecord = {
-      user_id:        autoId,            // ID de la cuenta destino creada
+      user_id:        autoId,
       policy_version: "PP-2026-03-01-v1",
       consent_type:   "account_creation",
       accepted:       true,
       accepted_at:    new Date().toISOString(),
-      ip_address:     null,              // TODO: inyectar desde Worker (CF-Connecting-IP)
+      ip_address:     null,
       user_agent:     navigator.userAgent,
       source:         "web",
-      country:        "CL",             // TODO: obtener desde Worker o Cloudflare geo header
+      country:        "CL",
       legal_basis:    "consent"
     };
 
-    const payload={
-      id:autoId, nombre, rut, banco, tipoCuenta, numeroCuenta, correo, telefono,
-      consent: consentRecord  // se almacena junto al registro del usuario
+    // El timestamp definitivo (created_at) lo genera el worker en el servidor
+    const payload = {
+      id: autoId,
+      nombre,
+      rut,
+      banco,
+      tipoCuenta,
+      numeroCuenta,
+      correo,
+      telefono,
+      notas,          // ← campo libre, puede estar vacío
+      consent: consentRecord
     };
 
     try{
@@ -1138,7 +1146,8 @@ document.getElementById('backFromEscanear').addEventListener('click',()=>{
       this.textContent='Enviar'; this.disabled=false;
     }
   });
-  // ── Modal Compartir la app ─────────────────────────────────────────────
+
+  // ── Modal Compartir ───────────────────────────────────────────────────────
   let compartirQRHecho=false;
   function abrirModalCompartir(){
     document.getElementById('modalCompartir').classList.add('open');
