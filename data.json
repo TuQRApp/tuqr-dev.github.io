@@ -34,5 +34,14 @@
     "numeroCuenta": "212184",
     "correo": "nestragues@gmail.com",
     "telefono": "982897919"
+  },
+  "98067d58-1b60-40ac-ad82-0e6353dc7708": {
+    "banco": "Banco Falabella",
+    "rut": "8.231.562-4",
+    "nombre": "Filomena Nuñez",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "212845",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919"
   }
 }
