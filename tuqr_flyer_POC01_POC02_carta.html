@@ -33,11 +33,7 @@
     background: repeating-linear-gradient(to bottom,#ccc 0,#ccc 5px,transparent 5px,transparent 10px);
     position: relative; align-self: stretch;
   }
-  .cut-line::before {
-    content:"✂"; position:absolute; top:50%; left:50%;
-    transform:translate(-50%,-50%) rotate(90deg);
-    font-size:12px; color:#ccc; background:#fff; padding:3px 0;
-  }
+  .cut-line::before { display: none; }
 
   .lamina {
     width: 139.5mm; height: 216mm;
@@ -52,10 +48,7 @@
     border-bottom: 1px dashed #ccc;
     display: flex; align-items: center; justify-content: center;
   }
-  .cut-hint {
-    font-size: 7px; color: #bbb; letter-spacing: .5px; text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
-  }
+  .cut-hint { display: none; }
 
   /* Live area: remaining 85% */
   .live-area {
@@ -274,7 +267,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -282,7 +275,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -324,7 +317,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -332,7 +325,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -376,7 +369,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -384,7 +377,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -426,7 +419,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -434,7 +427,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -478,7 +471,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -486,7 +479,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -528,7 +521,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -536,7 +529,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -580,7 +573,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -588,7 +581,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -630,7 +623,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -638,7 +631,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -682,7 +675,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -690,7 +683,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -732,7 +725,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -740,7 +733,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -784,7 +777,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -792,7 +785,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -834,7 +827,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -842,7 +835,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -886,7 +879,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -894,7 +887,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -936,7 +929,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -944,7 +937,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -988,7 +981,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -996,7 +989,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -1038,7 +1031,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -1046,7 +1039,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -1090,7 +1083,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -1098,7 +1091,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -1140,7 +1133,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -1148,7 +1141,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -1192,7 +1185,7 @@
 
 <div class="sheet">
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -1200,7 +1193,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
@@ -1242,7 +1235,7 @@
   </div>
   <div class="cut-line"></div>
   <div class="lamina">
-    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="top-dead-zone"></div>
     <div class="live-area">
       <div class="top-bar"></div>
       <div class="logo-header">
@@ -1250,7 +1243,7 @@
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
       <div class="hero">
-        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+        <div class="hero-line1">Transfiere sin ingresar datos manualmente</div>
       </div>
       <div class="qr-card">
         <div class="process-inline">
