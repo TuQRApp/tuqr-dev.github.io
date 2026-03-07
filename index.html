@@ -108,7 +108,7 @@
     </div>
 
     <div class="card">
-      <div class="badge"><span class="dot"></span> 1452 Dev Transferencia rápida y sin errores</div>
+      <div class="badge"><span class="dot"></span>Transferencia rápida y sin errores</div>
 
       <h1 id="title">Paga con transferencia</h1>
       <p>Copia y pega en tu app bancaria</p>
@@ -274,7 +274,7 @@ async function init(){
 
     if(!id || !d){ showError('Código inválido'); return; }
 
-    titleEl.textContent = `Dev-Paga a ${sv(d.nombre)}`;
+    titleEl.textContent = `Paga a ${sv(d.nombre)}`;
     document.title      = `Dev - ${sv(d.nombre)}`;
 
     const { textPlain, fields, lines } = buildText(d);
