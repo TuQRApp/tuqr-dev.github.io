@@ -44,5 +44,28 @@
       "country": "CL",
       "legal_basis": "consent"
     }
+  },
+  "digital_1dc1299e-8503-4ffb-8e75-40239e82a937": {
+    "banco": "Banco Consorcio",
+    "rut": "13.268.177-5",
+    "nombre": "Nico Estragues",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "84845640",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919",
+    "notas": "Prueba sin QR",
+    "created_at": "2026-03-07T21:49:59.027Z",
+    "consent": {
+      "user_id": "digital_1dc1299e-8503-4ffb-8e75-40239e82a937",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-03-07T21:49:58.531Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/143.0.7499.151 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
