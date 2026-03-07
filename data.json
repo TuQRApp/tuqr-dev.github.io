@@ -43,5 +43,14 @@
     "numeroCuenta": "212845",
     "correo": "nestragues@gmail.com",
     "telefono": "982897919"
+  },
+  "7848c8a2-6e21-4ebd-9aab-fea9f26be63a": {
+    "banco": "Banco BCI",
+    "rut": "10.270.304-9",
+    "nombre": "Daniella Molettieri",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "54540",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919"
   }
 }
