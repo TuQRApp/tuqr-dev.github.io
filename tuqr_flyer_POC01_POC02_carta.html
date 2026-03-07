@@ -68,22 +68,21 @@
     background: linear-gradient(90deg,#ffd400,#ff7a18);
   }
 
-  /* Logo header — 50% of lamina width */
+  /* Logo header — 33% of lamina width (2/3 of previous 50%) */
   .logo-header {
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     padding: 4px 0 3px;
-    border-bottom: 1px solid var(--border);
   }
   .logo-header img {
-    width: 50%;
+    width: 33%;
     height: auto;
     object-fit: contain;
   }
   /* Placeholder shown when no logo */
   .logo-placeholder {
-    width: 50%;
-    height: 36px;
+    width: 33%;
+    height: 28px;
     display: flex; align-items: center; justify-content: center;
     background: rgba(255,212,0,.15);
     border-radius: 6px;
@@ -91,7 +90,7 @@
     letter-spacing: .5px;
   }
 
-  /* Hero text ~80% box width */
+  /* Hero text — single line, muted weight, 10% smaller than hero-line2 was */
   .hero {
     flex-shrink: 0; margin: 5px 10px 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -100,12 +99,32 @@
   }
   .hero .dot { display: none; }
   .hero-line1 {
-    font-size: 17.5px; font-weight: 800; text-transform: uppercase;
-    letter-spacing: .2px; color: var(--text); line-height: 1.3;
-  }
-  .hero-line2 {
-    font-size: 17.5px; font-weight: 600; text-transform: uppercase;
+    font-size: 15.75px; font-weight: 600; text-transform: uppercase;
     letter-spacing: .2px; color: var(--muted); line-height: 1.3;
+  }
+  .hero-line2 { display: none; }
+
+  /* process inside qr-card, above QR */
+  .process-inline {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    width: 95%; gap: 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .process-inline .process-step {
+    font-size: 11.4px; font-weight: 700; color: var(--text);
+    text-transform: uppercase; letter-spacing: .1px;
+    text-align: center; flex: 1;
+    line-height: 1.3;
+  }
+  .process-inline .process-arrow {
+    font-size: 15px; font-weight: 900;
+    color: var(--primary);
+    flex-shrink: 0; padding: 0 2px;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(255,122,24,.35);
   }
 
   /* qr-card */
@@ -158,12 +177,10 @@
   /* fields-wrap: reduced to 2/3 of original flex:1 → use explicit sizing */
   .fields-wrap {
     flex-shrink: 0;
-    /* 2/3 of what flex:1 would give — approximate with fixed small size */
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 10px; /* 2 extra spaces between rows */
+    gap: 20px; /* double spacing between rows, no dashed line */
     width: 100%;
-    border-top: 1px dashed rgba(0,0,0,.12);
     padding: 6px 0 4px;
     margin-top: 4px;
   }
@@ -197,31 +214,9 @@
   .ul-18 { width: calc(18 * 6.9px); }
   .ul-12 { width: calc(12 * 6.9px); }
 
-  /* 3-step process row */
-  .process-card {
-    flex-shrink: 0; margin: 5px 10px 0;
-    background: #fff; border: 1px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 7px 10px;
-    display: flex; align-items: center; justify-content: center;
-    width: calc(100% - 20px);
-  }
-  .process-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: 0; width: 95%; /* occupy 95% of card width */
-  }
-  .process-step {
-    font-size: 9.5px; font-weight: 400; color: var(--text);
-    text-transform: uppercase; letter-spacing: .1px;
-    text-align: center; flex: 1;
-    line-height: 1.25;
-  }
-  .process-arrow {
-    font-size: 13px; font-weight: 400;
-    color: var(--primary);
-    flex-shrink: 0; padding: 0 3px;
-    line-height: 1;
-  }
+  /* 3-step process row — now inline inside qr-card */
+  .process-card { display: none; }
+  .process-row { display: none; }
 
   .pills {
     flex-shrink:0; margin:5px 10px 0; display:flex; gap:5px;
@@ -267,18 +262,25 @@
 
       <!-- Logo -->
       <div class="logo-header">
-        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="logo-placeholder" style="display:none">./TuQRLogo.png</div>
+        <img src="TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
 
       <div class="hero">
         <div class="dot"></div>
-        <div class="hero-line1">Transfiere desde la app de tu banco</div>
-        <div class="hero-line2">Como siempre</div>
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
         <div class="dot"></div>
       </div>
 
       <div class="qr-card">
+        <!-- Process steps inline, above QR -->
+        <div class="process-inline" style="margin-top:6px;">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
         <div class="qr-top">
           <div class="qr-frame">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -299,17 +301,6 @@
             <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
             <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
           </div>
-        </div>
-      </div>
-
-      <!-- 3-step process card -->
-      <div class="process-card">
-        <div class="process-row">
-          <span class="process-step">Copia los datos</span>
-          <span class="process-arrow">→</span>
-          <span class="process-step">Abre la app<br>de tu banco</span>
-          <span class="process-arrow">→</span>
-          <span class="process-step">Pega y transfiere</span>
         </div>
       </div>
 
@@ -341,12 +332,19 @@
 
       <div class="hero">
         <div class="dot"></div>
-        <div class="hero-line1">Transfiere desde la app de tu banco.</div>
-        <div class="hero-line2">Como siempre.</div>
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
         <div class="dot"></div>
       </div>
 
       <div class="qr-card">
+        <!-- Process steps inline, above QR -->
+        <div class="process-inline" style="margin-top:6px;">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
         <div class="qr-top">
           <div class="qr-frame">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -366,16 +364,6 @@
             <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
             <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
           </div>
-        </div>
-      </div>
-
-      <div class="process-card">
-        <div class="process-row">
-          <span class="process-step">Copia los datos</span>
-          <span class="process-arrow">→</span>
-          <span class="process-step">Abre la app<br>de tu banco</span>
-          <span class="process-arrow">→</span>
-          <span class="process-step">Pega y transfiere</span>
         </div>
       </div>
 
