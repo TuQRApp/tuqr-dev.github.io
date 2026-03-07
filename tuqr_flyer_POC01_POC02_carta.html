@@ -63,12 +63,12 @@
   }
   .hero .dot { display: none; }
   .hero-line1 {
-    font-size: 9px; font-weight: 800; text-transform: uppercase;
-    letter-spacing: .3px; color: var(--text); line-height: 1.4;
+    font-size: 13.5px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .2px; color: var(--text); line-height: 1.35;
   }
   .hero-line2 {
-    font-size: 9px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: .3px; color: var(--muted); line-height: 1.4;
+    font-size: 13.5px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .2px; color: var(--muted); line-height: 1.35;
   }
 
   /* qr-card: flex:1, layout interno en columna */
@@ -93,23 +93,23 @@
   }
 
   .qr-frame {
-    position: relative; width: 190px; height: 190px;
+    position: relative; width: 266px; height: 266px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .corner {
-    position: absolute; width: 22px; height: 22px;
+    position: absolute; width: 26px; height: 26px;
     border-color: var(--primary); border-style: solid;
   }
-  .tl { top:0; left:0;  border-width:4px 0 0 4px; border-radius:5px 0 0 0; }
-  .tr { top:0; right:0; border-width:4px 4px 0 0; border-radius:0 5px 0 0; }
-  .bl { bottom:0; left:0;  border-width:0 0 4px 4px; border-radius:0 0 0 5px; }
-  .br { bottom:0; right:0; border-width:0 4px 4px 0; border-radius:0 0 4px 0; }
+  .tl { top:0; left:0;  border-width:5px 0 0 5px; border-radius:5px 0 0 0; }
+  .tr { top:0; right:0; border-width:5px 5px 0 0; border-radius:0 5px 0 0; }
+  .bl { bottom:0; left:0;  border-width:0 0 5px 5px; border-radius:0 0 0 5px; }
+  .br { bottom:0; right:0; border-width:0 5px 5px 0; border-radius:0 0 5px 0; }
 
   .qr-svg-wrap {
-    width:174px; height:174px;
+    width:248px; height:248px;
     display:flex; align-items:center; justify-content:center;
   }
-  .qr-svg-wrap svg { width:174px !important; height:174px !important; }
+  .qr-svg-wrap svg { width:248px !important; height:248px !important; }
 
   .qr-id {
     font-size: 6px; font-weight: 700; color: var(--muted);
@@ -133,18 +133,20 @@
     flex-wrap: nowrap; white-space: nowrap;
   }
   .field-label {
-    font-size: 7px; font-weight: 700; color: var(--text);
+    font-size: 10px; font-weight: 700; color: var(--text);
   }
   .field-ul {
-    font-size: 7px; color: var(--text);
+    font-size: 10px; color: var(--text);
     letter-spacing: 0px; line-height: 1;
     border-bottom: 1px solid var(--text);
     display: inline-block;
   }
-  /* widths by character count at ~4.3px per char (7px font) */
-  .ul-30 { width: calc(30 * 4.3px); }
-  .ul-15 { width: calc(15 * 4.3px); }
-  .ul-10 { width: calc(10 * 4.3px); }
+  /* Row 1: original lengths at 5.5px/char */
+  .ul-30 { width: calc(30 * 5.5px); }
+  .ul-15 { width: calc(15 * 5.5px); }
+  /* Row 2: +20% lengths */
+  .ul-18 { width: calc(18 * 5.5px); }
+  .ul-12 { width: calc(12 * 5.5px); }
 
   /* Pasos 2x2 */
   .steps-card {
@@ -160,10 +162,10 @@
     width:24px; height:24px; border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--accent));
     box-shadow:0 2px 6px rgba(255,122,24,.25);
-    color:#fff; font-size:9px; font-weight:900;
+    color:#fff; font-size:11px; font-weight:900;
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .step-main { font-size:9px; font-weight:800; color:var(--text); line-height:1.2; }
+  .step-main { font-size:11px; font-weight:800; color:var(--text); line-height:1.2; }
 
   .pills {
     flex-shrink:0; margin:6px 10px 0; display:flex; gap:5px;
@@ -217,9 +219,9 @@
         <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
       </div>
       <div class="field-row">
-        <span class="field-label">Banco</span><span class="field-ul ul-15"></span>
-        <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-10"></span>
-        <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-15"></span>
+        <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+        <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+        <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
       </div>
     </div>
   </div>
@@ -264,9 +266,9 @@
         <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
       </div>
       <div class="field-row">
-        <span class="field-label">Banco</span><span class="field-ul ul-15"></span>
-        <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-10"></span>
-        <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-15"></span>
+        <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+        <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+        <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
       </div>
     </div>
   </div>
