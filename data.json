@@ -1,58 +1,5 @@
 {
-  "2abb35aa-fcbb-441f-aaaf-78d88ac3a584": {
-    "banco": "Banco Santander",
-    "rut": "13.268.177-5",
-    "nombre": "Prueba ScanQR5",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "82828282882",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
-  "8321616d-cbcf-4619-8aed-521d6b62177b": {
-    "banco": "Banco Falabella",
-    "rut": "24.001.985-K",
-    "nombre": "Juan Rodriguez",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "098120812",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
-  "24001985K_BancoSecurity_987098710973": {
-    "banco": "Banco Security",
-    "rut": "24.001.985-K",
-    "nombre": "Juan Rodriguez",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "987098710973",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
-  "digital_279364aa-d0ae-464c-b9ca-ec95a08b7a18": {
-    "banco": "Banco Santander",
-    "rut": "23.182.071-k",
-    "nombre": "Nicolás Estragues",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "212184",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
-  "98067d58-1b60-40ac-ad82-0e6353dc7708": {
-    "banco": "Banco Falabella",
-    "rut": "8.231.562-4",
-    "nombre": "Filomena Nuñez",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "212845",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
-  "7848c8a2-6e21-4ebd-9aab-fea9f26be63a": {
-    "banco": "Banco BCI",
-    "rut": "10.270.304-9",
-    "nombre": "Daniella Molettieri",
-    "tipoCuenta": "Cuenta Corriente",
-    "numeroCuenta": "54540",
-    "correo": "nestragues@gmail.com",
-    "telefono": "982897919"
-  },
+    },
   "a49ddfe9-acc7-4f75-909c-f5a27621b289": {
     "banco": "Banco Estado",
     "rut": "5.565.583-9",
