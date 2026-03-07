@@ -1,7 +1,7 @@
 // sw.js — TuQR
 // Versión del cache. Cambiar SOLO si modificas los assets estáticos (logo, manifest).
 // Los archivos HTML NUNCA se cachean — siempre van a la red.
-const CACHE_VERSION = 'tuqr-v7';
+const CACHE_VERSION = 'tuqr-v8';
 
 const STATIC_ASSETS = [
   './TuQRLogo.png',
