@@ -92,7 +92,7 @@
 
   /* Hero text — plain, no badge */
   .hero {
-    flex-shrink: 0; margin: 4px 10px 8px;
+    flex-shrink: 0; margin: 4px 10px 16px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center;
   }
@@ -114,7 +114,7 @@
     margin-bottom: 4px;
   }
   .process-inline .process-step {
-    font-size: 12.6px; font-weight: 700; color: var(--text);
+    font-size: 13.86px; font-weight: 400; color: var(--text);
     text-transform: uppercase; letter-spacing: .1px;
     text-align: center; flex: 1;
     line-height: 1.3;
@@ -127,10 +127,12 @@
     text-shadow: 1px 1px 2px rgba(255,122,24,.35);
   }
 
-  /* qr-card */
+  /* qr-card — always square */
   .qr-card {
-    flex: 1; min-height: 0;
-    margin: 5px 10px 0;
+    flex-shrink: 0;
+    width: calc(100% - 20px);
+    aspect-ratio: 1 / 1;
+    margin: 0 10px;
     background: #fff; border: 1px solid var(--border);
     border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 6px 10px 8px;
@@ -207,12 +209,12 @@
     border-bottom: 1px solid var(--text);
     display: inline-block;
   }
-  /* Row 1 */
-  .ul-30 { width: calc(30 * 5.6px); }
+  /* Row 1: nombre +10%, rut unchanged */
+  .ul-30 { width: calc(30 * 6.16px); }
   .ul-15 { width: calc(15 * 5.6px); }
-  /* Row 2: tuned for ~90% card width at 12.6px */
-  .ul-18 { width: calc(18 * 6.24px); }
-  .ul-12 { width: calc(12 * 6.24px); }
+  /* Row 2: banco and tipo cta -20% */
+  .ul-18 { width: calc(18 * 4.99px); }
+  .ul-12 { width: calc(12 * 4.99px); }
 
   /* 3-step process row — now inline inside qr-card */
   .process-card { display: none; }
@@ -277,7 +279,7 @@
         <div class="process-inline" >
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Pega y<br>transfiere</span>
         </div>
@@ -341,7 +343,7 @@
         <div class="process-inline" >
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Pega y<br>transfiere</span>
         </div>
