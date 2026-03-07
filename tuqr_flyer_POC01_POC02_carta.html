@@ -94,7 +94,7 @@
   .hero {
     flex-shrink: 0; margin: 5px 10px 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: rgba(255,212,0,.18); border: 1.5px solid rgba(255,212,0,.50);
+    background: rgba(255,212,0,.09); border: 1.5px solid rgba(255,212,0,.28);
     padding: 5px 12px; border-radius: 12px; text-align: center;
   }
   .hero .dot { display: none; }
@@ -109,18 +109,19 @@
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     width: 95%; gap: 0;
+    padding-top: 8px;
     padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
     margin-bottom: 4px;
   }
   .process-inline .process-step {
-    font-size: 11.4px; font-weight: 700; color: var(--text);
+    font-size: 15.75px; font-weight: 700; color: var(--text);
     text-transform: uppercase; letter-spacing: .1px;
     text-align: center; flex: 1;
     line-height: 1.3;
   }
   .process-inline .process-arrow {
-    font-size: 15px; font-weight: 900;
+    font-size: 18px; font-weight: 900;
     color: var(--primary);
     flex-shrink: 0; padding: 0 2px;
     line-height: 1;
@@ -149,11 +150,11 @@
   }
 
   .qr-frame {
-    position: relative; width: 200px; height: 200px;
+    position: relative; width: 252px; height: 252px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .corner {
-    position: absolute; width: 20px; height: 20px;
+    position: absolute; width: 24px; height: 24px;
     border-color: var(--primary); border-style: solid;
   }
   .tl { top:0; left:0;  border-width:4px 0 0 4px; border-radius:4px 0 0 0; }
@@ -162,13 +163,13 @@
   .br { bottom:0; right:0; border-width:0 4px 4px 0; border-radius:0 0 4px 0; }
 
   .qr-svg-wrap {
-    width:186px; height:186px;
+    width:236px; height:236px;
     display:flex; align-items:center; justify-content:center;
   }
-  .qr-svg-wrap svg { width:186px !important; height:186px !important; }
+  .qr-svg-wrap svg { width:236px !important; height:236px !important; }
 
   .qr-id {
-    font-size: 6px; font-weight: 700; color: var(--muted);
+    font-size: 8px; font-weight: 700; color: var(--muted);
     letter-spacing: .5px; text-align: center;
     font-family: 'Courier New', monospace;
     line-height: 1; margin-top: 2px;
@@ -199,20 +200,20 @@
      With font 11px: labels≈33px, ul widths: keep 6.0px/ch: 48*6.0=288 + 33 = 321 → 90% ✓
      Final: font-size 11.5px, ul multiplier 6.2px/ch */
   .field-label {
-    font-size: 11.5px; font-weight: 700; color: var(--text);
+    font-size: 15.75px; font-weight: 700; color: var(--text);
   }
   .field-ul {
-    font-size: 11.5px; color: var(--text);
+    font-size: 15.75px; color: var(--text);
     letter-spacing: 0px; line-height: 1;
     border-bottom: 1px solid var(--text);
     display: inline-block;
   }
-  /* Row 1: scale proportionally with new font */
-  .ul-30 { width: calc(30 * 5.5px); }
-  .ul-15 { width: calc(15 * 5.5px); }
-  /* Row 2: +20% lengths, tuned so row 2 ≈ 90% card width */
-  .ul-18 { width: calc(18 * 6.9px); }
-  .ul-12 { width: calc(12 * 6.9px); }
+  /* Row 1 */
+  .ul-30 { width: calc(30 * 7px); }
+  .ul-15 { width: calc(15 * 7px); }
+  /* Row 2: tuned for ~90% card width at 15.75px */
+  .ul-18 { width: calc(18 * 7.8px); }
+  .ul-12 { width: calc(12 * 7.8px); }
 
   /* 3-step process row — now inline inside qr-card */
   .process-card { display: none; }
@@ -274,7 +275,7 @@
 
       <div class="qr-card">
         <!-- Process steps inline, above QR -->
-        <div class="process-inline" style="margin-top:6px;">
+        <div class="process-inline" >
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Abre la app de<br><u>tu banco</u></span>
@@ -338,7 +339,7 @@
 
       <div class="qr-card">
         <!-- Process steps inline, above QR -->
-        <div class="process-inline" style="margin-top:6px;">
+        <div class="process-inline" >
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Abre la app de<br><u>tu banco</u></span>
