@@ -52,5 +52,28 @@
     "numeroCuenta": "54540",
     "correo": "nestragues@gmail.com",
     "telefono": "982897919"
+  },
+  "a49ddfe9-acc7-4f75-909c-f5a27621b289": {
+    "banco": "Banco Estado",
+    "rut": "5.565.583-9",
+    "nombre": "Juan perez",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "545484",
+    "correo": "nestragues@gmail.com",
+    "telefono": "982897919",
+    "notas": "Feria",
+    "created_at": "2026-03-07T08:02:42.351Z",
+    "consent": {
+      "user_id": "a49ddfe9-acc7-4f75-909c-f5a27621b289",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-03-07T08:02:41.842Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/143.0.7499.151 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
