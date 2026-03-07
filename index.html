@@ -275,7 +275,7 @@ async function init(){
     if(!id || !d){ showError('Código inválido'); return; }
 
     titleEl.textContent = `Paga a ${sv(d.nombre)}`;
-    document.title      = `Dev - ${sv(d.nombre)}`;
+    document.title      = `${sv(d.nombre)} — TuQR`;
 
     const { textPlain, fields, lines } = buildText(d);
     cachedText   = textPlain;
@@ -284,21 +284,21 @@ async function init(){
     datosEl.textContent = lines.join('\n');
 
     btn.disabled = false;
- btn.addEventListener('click', async function(){
-  const ok = await copyText(cachedText);
-  if(ok){
-    showCopied();
-    try{ gtag('event','copy_click',{ merchant_id: id, source: 'button' }); }catch(_){}
-  } else {
-    try{
-      const range = document.createRange();
-      range.selectNodeContents(datosEl);
-      const sel = window.getSelection();
-      if(sel){ sel.removeAllRanges(); sel.addRange(range); }
-    }catch(_){}
-    alert('Selecciona el texto y cópialo manualmente, o usa los botones de abajo.');
-  }
-  });
+    btn.addEventListener('click', async function(){
+      const ok = await copyText(cachedText);
+      if(ok){
+        showCopied();
+        try{ gtag('event','copy_click',{ merchant_id: id, source: 'button' }); }catch(_){}
+      } else {
+        try{
+          const range = document.createRange();
+          range.selectNodeContents(datosEl);
+          const sel = window.getSelection();
+          if(sel){ sel.removeAllRanges(); sel.addRange(range); }
+        }catch(_){}
+        alert('Selecciona el texto y cópialo manualmente, o usa los botones de abajo.');
+      }
+    });
 
     fieldsWrap.style.display = 'grid';
 
