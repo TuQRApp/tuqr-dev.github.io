@@ -75,13 +75,13 @@
     padding: 4px 0 3px;
   }
   .logo-header img {
-    width: 33%;
+    width: 22%;
     height: auto;
     object-fit: contain;
   }
   /* Placeholder shown when no logo */
   .logo-placeholder {
-    width: 33%;
+    width: 22%;
     height: 28px;
     display: flex; align-items: center; justify-content: center;
     background: rgba(255,212,0,.15);
@@ -90,12 +90,11 @@
     letter-spacing: .5px;
   }
 
-  /* Hero text — single line, muted weight, 10% smaller than hero-line2 was */
+  /* Hero text — plain, no badge */
   .hero {
-    flex-shrink: 0; margin: 5px 10px 0;
+    flex-shrink: 0; margin: 4px 10px 8px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: rgba(255,212,0,.09); border: 1.5px solid rgba(255,212,0,.28);
-    padding: 5px 12px; border-radius: 12px; text-align: center;
+    text-align: center;
   }
   .hero .dot { display: none; }
   .hero-line1 {
@@ -180,9 +179,9 @@
     flex-shrink: 0;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 20px; /* double spacing between rows, no dashed line */
+    gap: 20px;
     width: 100%;
-    padding: 6px 0 4px;
+    padding: 6px 0 12px;
     margin-top: 4px;
   }
   .field-row {
@@ -276,11 +275,11 @@
       <div class="qr-card">
         <!-- Process steps inline, above QR -->
         <div class="process-inline" >
-          <span class="process-step">Escanea</span>
+          <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Abre la app</u></span>
+          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Pega</span>
+          <span class="process-step">Pega y<br>transfiere</span>
         </div>
         <div class="qr-top">
           <div class="qr-frame">
@@ -340,11 +339,11 @@
       <div class="qr-card">
         <!-- Process steps inline, above QR -->
         <div class="process-inline" >
-          <span class="process-step">Escanea</span>
+          <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Abre la app</u></span>
+          <span class="process-step">Abre la app de<br><u>tu banco</u></span>
           <span class="process-arrow">➜</span>
-          <span class="process-step">Pega</span>
+          <span class="process-step">Pega y<br>transfiere</span>
         </div>
         <div class="qr-top">
           <div class="qr-frame">
