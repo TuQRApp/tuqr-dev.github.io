@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>TuQR — POC01 + POC02</title>
+<title>TuQR — POC01 al POC20 — 10 hojas</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+
   :root {
     --primary: #ff7a18;
     --accent:  #ffd400;
@@ -245,38 +246,35 @@
     .sheet { width:279mm; height:216mm; }
     @page { size:279mm 216mm landscape; margin:0; }
   }
+
+
+  .qr-render { width:236px; height:236px; display:flex; align-items:center; justify-content:center; }
+  .qr-render img, .qr-render canvas { width:236px !important; height:236px !important; }
+
+  /* Print: each sheet on its own page */
+  @media print {
+    .sheet { page-break-after: always; }
+    .sheet:last-child { page-break-after: avoid; }
+  }
+
 </style>
 </head>
 <body>
+
 <div class="sheet">
-
-  <!-- ===== LAMINA 1 ===== -->
   <div class="lamina">
-
-    <!-- 15% top dead zone -->
-    <div class="top-dead-zone">
-      <span class="cut-hint">✂ recortar</span>
-    </div>
-
-    <!-- Live area (85%) -->
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
     <div class="live-area">
       <div class="top-bar"></div>
-
-      <!-- Logo -->
       <div class="logo-header">
-        <img src="TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
-
       <div class="hero">
-        <div class="dot"></div>
         <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
-        <div class="dot"></div>
       </div>
-
       <div class="qr-card">
-        <!-- Process steps inline, above QR -->
-        <div class="process-inline" >
+        <div class="process-inline">
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
@@ -287,12 +285,12 @@
           <div class="qr-frame">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
-            <div class="qr-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" shape-rendering="crispEdges"><rect width="240" height="240" fill="white"/><rect x="21.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="213.33" width="5.33" height="5.33" fill="black"/></svg></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-01" class="qr-render"></div>
+            </div>
           </div>
           <div class="qr-id">TuQR_POC01</div>
         </div>
-
-        <!-- Fields: 2/3 height, 10px gap between rows, 90% width on row2 -->
         <div class="fields-wrap">
           <div class="field-row">
             <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
@@ -305,42 +303,28 @@
           </div>
         </div>
       </div>
-
       <div class="pills">
         <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
         <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
         <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
       </div>
       <div class="bottom-bar"></div>
-    </div><!-- /live-area -->
-  </div><!-- /lamina 1 -->
-
-  <div class="cut-line"></div>
-
-  <!-- ===== LAMINA 2 ===== -->
-  <div class="lamina">
-
-    <div class="top-dead-zone">
-      <span class="cut-hint">✂ recortar</span>
     </div>
-
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
     <div class="live-area">
       <div class="top-bar"></div>
-
       <div class="logo-header">
-        <img src="TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
       </div>
-
       <div class="hero">
-        <div class="dot"></div>
         <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
-        <div class="dot"></div>
       </div>
-
       <div class="qr-card">
-        <!-- Process steps inline, above QR -->
-        <div class="process-inline" >
+        <div class="process-inline">
           <span class="process-step">Escanea<br>y Copia</span>
           <span class="process-arrow">➜</span>
           <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
@@ -351,11 +335,12 @@
           <div class="qr-frame">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
-            <div class="qr-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" shape-rendering="crispEdges"><rect width="240" height="240" fill="white"/><rect x="21.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="21.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="26.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="32.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="37.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="42.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="48.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="53.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="58.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="64.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="69.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="74.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="80.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="85.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="90.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="96.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="101.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="106.67" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="112.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="117.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="122.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="128.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="133.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="138.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="144.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="149.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="154.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="160.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="165.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="58.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="170.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="176.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="181.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="186.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="186.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="192.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="122.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="144.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="197.33" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="64.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="96.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="106.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="202.67" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="69.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="90.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="117.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="133.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="149.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="170.67" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="208.00" width="5.33" height="5.33" fill="black"/><rect x="21.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="26.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="32.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="37.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="42.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="48.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="53.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="74.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="80.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="85.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="101.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="112.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="128.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="138.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="154.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="160.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="165.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="176.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="181.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="192.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="197.33" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="202.67" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="208.00" y="213.33" width="5.33" height="5.33" fill="black"/><rect x="213.33" y="213.33" width="5.33" height="5.33" fill="black"/></svg></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-02" class="qr-render"></div>
+            </div>
           </div>
           <div class="qr-id">TuQR_POC02</div>
         </div>
-
         <div class="fields-wrap">
           <div class="field-row">
             <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
@@ -368,16 +353,1038 @@
           </div>
         </div>
       </div>
-
       <div class="pills">
         <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
         <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
         <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
       </div>
       <div class="bottom-bar"></div>
-    </div><!-- /live-area -->
-  </div><!-- /lamina 2 -->
-
+    </div>
+  </div>
 </div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-03" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC03</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-04" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC04</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-05" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC05</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-06" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC06</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-07" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC07</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-08" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC08</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-09" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC09</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-10" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC10</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-11" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC11</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-12" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC12</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-13" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC13</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-14" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC14</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-15" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC15</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-16" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC16</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-17" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC17</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-18" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC18</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-19" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC19</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+  <div class="cut-line"></div>
+  <div class="lamina">
+    <div class="top-dead-zone"><span class="cut-hint">✂ recortar</span></div>
+    <div class="live-area">
+      <div class="top-bar"></div>
+      <div class="logo-header">
+        <img src="./TuQRLogo.png" alt="TuQR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">TuQRLogo.png</div>
+      </div>
+      <div class="hero">
+        <div class="hero-line1">Transfiere sin ingresar los datos a mano</div>
+      </div>
+      <div class="qr-card">
+        <div class="process-inline">
+          <span class="process-step">Escanea<br>y Copia</span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Abre la app de<br><strong>tu banco</strong></span>
+          <span class="process-arrow">➜</span>
+          <span class="process-step">Pega y<br>transfiere</span>
+        </div>
+        <div class="qr-top">
+          <div class="qr-frame">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+            <div class="qr-svg-wrap">
+              <div id="qr-20" class="qr-render"></div>
+            </div>
+          </div>
+          <div class="qr-id">TuQR_POC20</div>
+        </div>
+        <div class="fields-wrap">
+          <div class="field-row">
+            <span class="field-label">Nombre</span><span class="field-ul ul-30"></span>
+            <span class="field-label">Rut</span><span class="field-ul ul-15"></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Banco</span><span class="field-ul ul-18"></span>
+            <span class="field-label">Tipo&nbsp;Cta</span><span class="field-ul ul-12"></span>
+            <span class="field-label">Nro&nbsp;Cta</span><span class="field-ul ul-18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
+        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
+        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      </div>
+      <div class="bottom-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+window.addEventListener('load', function() {
+  new QRCode(document.getElementById('qr-01'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=7cc9787b-5d3a-432f-b5c1-1f68903ed2aa',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-02'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=5fc88f44-10bd-4466-b899-8af75174e885',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-03'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=a49ddfe9-acc7-4f75-909c-f5a27621b289',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-04'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=74bed574-31bb-40fb-a1d2-efd9a770b157',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-05'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=f8e2f881-5283-42a9-a86a-ad018e37b092',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-06'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=9977cc9b-5667-468a-bad5-1113ca529669',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-07'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=94367123-4125-456b-8e79-b7716f096aa6',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-08'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=2e02598c-8a95-482b-9b20-9cc0fbc7d7ed',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-09'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=282deff9-eb9c-496f-8e90-ca720442c288',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-10'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=89076a09-a6e9-4439-bbe9-a3911f8741d4',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-11'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=04a0f4d9-3b7b-4598-945d-303726456085',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-12'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=79b40eff-6129-482c-bbde-e958036ea909',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-13'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=a840880c-1da4-46ea-8747-a799d6715345',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-14'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=916b0571-2e34-4c5c-adc7-d95be3d7152c',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-15'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=508beaa3-acdb-49c1-a205-5d5364dddd96',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-16'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=78bf6034-4ea8-41a1-9ca6-d3fbc7ba8dd4',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-17'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=05dfaf9a-6499-4f77-8182-b41a7ca73a07',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-18'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=45b919ae-8c6a-4d88-b780-8bcc677e4823',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-19'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=fde993bf-589b-41ad-9f63-50b6ee2de484',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  new QRCode(document.getElementById('qr-20'), {
+    text: 'https://tuqrapp.github.io/tuqr-dev.github.io/?id=d1064ae9-720a-40a2-aedd-0e30069742aa',
+    width: 236, height: 236,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+});
+</script>
 </body>
 </html>
