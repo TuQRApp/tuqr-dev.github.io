@@ -21,5 +21,28 @@
       "country": "CL",
       "legal_basis": "consent"
     }
+  },
+  "78454c6b-7049-4399-aa84-98ad6e35602d": {
+    "banco": "Banco Estado",
+    "rut": "13.268.177-5",
+    "nombre": "Nicolás Estragues",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "548546",
+    "correo": "nestragues@gmail.com",
+    "telefono": "952897919",
+    "notas": "",
+    "created_at": "2026-03-07T09:24:09.673Z",
+    "consent": {
+      "user_id": "78454c6b-7049-4399-aa84-98ad6e35602d",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-03-07T09:24:09.039Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/143.0.7499.151 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
