@@ -456,7 +456,7 @@
   emailjs.init('yejdBOXVs6y3d8piR');
 
   const WORKER_URL = 'https://tuqr-worker-dev.nestragues.workers.dev/';
-  const BASE_URL    = 'https://tuqrapp.github.io/tuqr-dev.github.io/';
+  const BASE_URL    = 'https://tuqr.io/';
   const DATA_URL    = BASE_URL + 'data.json';
   const STORAGE_KEY = 'tuqr_id';
 
@@ -807,7 +807,12 @@
     // Intentar cargar inmediatamente
     const ok=await mostrarApp(savedId);
     if(ok) return;
-    // GitHub Pages puede tardar en propagar el data.json — hacer polling hasta 3 min
+    // GitHub Pages puede tardar en propagar el data.json — mostrar espera y hacer polling
+    ocultarTodo();
+    document.getElementById('esperaNombre').textContent='';
+    document.getElementById('esperaWaitBox').style.display='flex';
+    document.getElementById('esperaError').style.display='none';
+    document.getElementById('screenEspera').style.display='flex';
     let intentos=0;
     const timer=setInterval(async()=>{
       intentos++;
