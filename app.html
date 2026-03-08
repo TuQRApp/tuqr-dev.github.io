@@ -273,6 +273,7 @@
     <div class="cuenta-destino-list" id="listaCuentasDestino"></div>
     <hr class="divider"/>
     <button class="cta-outline" id="btnMostrarFormNueva">+ Agregar cuenta</button>
+    <button class="link-back" onclick="window.location.href='./mi-usuario.html'">Ver mis datos personales →</button>
 
     <!-- Form nueva cuenta: L1 Nombre / L2 RUT+Tel / L3 Correo / L4 Banco+Tipo / L5 Número -->
     <div id="formNuevaCuenta" style="display:none; flex-direction:column; gap:12px; width:100%;">
@@ -443,7 +444,7 @@
     <div class="compartir-separador">o</div>
     <div class="compartir-seccion-label">Copia y envía el link a tu amigo</div>
     <div class="compartir-link-wrap">
-      <input class="compartir-link-input" id="compartirLinkInput" readonly value="https://tuqrapp.github.io/tuqr-dev.github.io/welcome.html"/>
+      <input class="compartir-link-input" id="compartirLinkInput" readonly value="https://tuqrapp.github.io/tuqr.github.io/welcome.html"/>
       <button class="compartir-copy-btn" id="compartirCopyBtn">Copiar</button>
     </div>
     <div class="compartir-copy-ok" id="compartirCopyOk">✓ Link copiado</div>
@@ -781,7 +782,7 @@
     document.getElementById('modalCompartir').classList.add('open');
     if(!compartirQRHecho){
       compartirQRHecho=true;
-      const WELCOME='https://tuqrapp.github.io/tuqr-dev.github.io/welcome.html';
+      const WELCOME='https://tuqrapp.github.io/tuqr.github.io/welcome.html';
       const container=document.getElementById('compartirQRContainer');
       container.innerHTML='';
       new QRCode(container,{text:WELCOME,width:208,height:208,correctLevel:QRCode.CorrectLevel.M});
