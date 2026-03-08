@@ -21,5 +21,28 @@
       "country": "CL",
       "legal_basis": "consent"
     }
+  },
+  "bc91c7f8-3353-4127-88bc-b952f1a0facc": {
+    "banco": "Mercado Pago",
+    "rut": "17.671.910-9",
+    "nombre": "Pascal Martínez",
+    "tipoCuenta": "Cuenta Vista",
+    "numeroCuenta": "1093352089",
+    "correo": "Pascal.martinez.v@gmail.com",
+    "telefono": "949372211",
+    "notas": "Italia",
+    "created_at": "2026-03-08T20:50:50.167Z",
+    "consent": {
+      "user_id": "bc91c7f8-3353-4127-88bc-b952f1a0facc",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-03-08T20:50:49.287Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/143.0.7499.151 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
