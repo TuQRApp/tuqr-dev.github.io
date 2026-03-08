@@ -1065,12 +1065,7 @@
         msgErr.innerHTML='<div class="err">Error guardando.'+detail+'</div>'; return;
       }
       localStorage.setItem(STORAGE_KEY,autoId);
-      document.getElementById('resNombre').textContent=nombre;
-      document.getElementById('waitBox').style.display='flex';
-      document.getElementById('msgQRError').style.display='none';
-      mostrarPantalla('screenCreado');
-      window.scrollTo({top:0,behavior:'smooth'});
-      iniciarPolling(autoId);
+      window.location.replace('./app.html');
     }catch(e){ msgErr.innerHTML='<div class="err">Fallo de red: '+e+'</div>'; }
   });
 

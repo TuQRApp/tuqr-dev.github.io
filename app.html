@@ -800,10 +800,25 @@
 
 
   // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────────────
   async function init(){
     const savedId=localStorage.getItem(STORAGE_KEY);
-    if(savedId){ const ok=await mostrarApp(savedId); if(ok) return; localStorage.removeItem(STORAGE_KEY); }
-    window.location.replace('./admin.html?accion=cambiar');
+    if(!savedId){ window.location.replace('./admin.html?accion=cambiar'); return; }
+    // Intentar cargar inmediatamente
+    const ok=await mostrarApp(savedId);
+    if(ok) return;
+    // GitHub Pages puede tardar en propagar el data.json — hacer polling hasta 3 min
+    let intentos=0;
+    const timer=setInterval(async()=>{
+      intentos++;
+      const ok=await mostrarApp(savedId);
+      if(ok){ clearInterval(timer); return; }
+      if(intentos>=36){ // 36 × 5s = 3 min
+        clearInterval(timer);
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.replace('./admin.html?accion=cambiar');
+      }
+    }, 5000);
   }
 
   // ── Modal Contacto ────────────────────────────────────────────────────────
