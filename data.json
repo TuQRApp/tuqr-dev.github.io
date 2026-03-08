@@ -54,18 +54,6 @@
     "correo": "nestragues@gmail.com",
     "telefono": "982897919",
     "notas": "",
-    "created_at": "2026-03-08T23:38:29.960Z",
-    "consent": {
-      "user_id": "digital_9e7b7130-0c6b-4fe7-9d84-300cbc84c4aa",
-      "policy_version": "PP-2026-03-01-v1",
-      "consent_type": "account_creation",
-      "accepted": true,
-      "accepted_at": "2026-03-08T23:38:32.465Z",
-      "ip_address": null,
-      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-      "source": "web",
-      "country": "CL",
-      "legal_basis": "consent"
-    }
+    "created_at": "2026-03-08T23:47:17.452Z"
   }
 }
