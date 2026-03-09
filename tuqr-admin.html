@@ -732,15 +732,15 @@ function initDeleteSection(){
     return cachedData;
   }
 
-  function doSearch(){
+  async function doSearch(){
     const q = normalizeStr(queryInput.value);
     if(!q){ resultsEl.innerHTML = ''; return; }
 
-    if(!cachedData){
-      resultsEl.innerHTML = '<div class="delete-empty">Cargando datos…</div>';
-      fetchFreshData().then(() => doSearch()).catch(() => {
-        resultsEl.innerHTML = '<div class="delete-empty">Error cargando datos.</div>';
-      });
+    resultsEl.innerHTML = '<div class="delete-empty">Buscando…</div>';
+    try{
+      await fetchFreshData();
+    }catch(e){
+      resultsEl.innerHTML = '<div class="delete-empty">Error cargando datos: ' + e.message + '</div>';
       return;
     }
 
@@ -841,7 +841,7 @@ function initDeleteSection(){
     });
   }
 
-  searchBtn.addEventListener('click', doSearch);
+  searchBtn.addEventListener('click', () => doSearch());
   queryInput.addEventListener('keydown', e => { if(e.key === 'Enter') doSearch(); });
 }
 </script>
