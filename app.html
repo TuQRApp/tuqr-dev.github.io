@@ -672,13 +672,14 @@
     const autoId=generarIdCuenta(du.rut||'',bancoVal,numeroVal);
     if(allData[autoId]){ msgErr.innerHTML='<div class="err-inline">Ya existe esa cuenta.</div>'; return; }
     this.textContent='Guardando…'; this.disabled=true;
-    const payload={ id:autoId, nombre:clean(du.nombre||''), rut:clean(du.rut||''), banco:bancoVal, tipoCuenta:tipoVal, numeroCuenta:numeroVal, correo:clean(du.correo||''), telefono:usuarioActivo.telefono_raw };
+    const consentOrigen = du.consent || null;
+    const payload={ id:autoId, nombre:clean(du.nombre||''), rut:clean(du.rut||''), banco:bancoVal, tipoCuenta:tipoVal, numeroCuenta:numeroVal, correo:clean(du.correo||''), telefono:usuarioActivo.telefono_raw, notas:'', ...(consentOrigen ? { consent: consentOrigen } : {}) };
     try{
       const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       const txt=await res.text(); let data={};
       try{data=JSON.parse(txt);}catch{}
       if(!res.ok||!data.ok){ msgErr.innerHTML='<div class="err-inline">Error al guardar.</div>'; this.textContent='Guardar cuenta'; this.disabled=false; return; }
-      allData[autoId]=payload; // actualizar memoria inmediatamente
+      allData[autoId]={...payload, created_at: new Date().toISOString()}; // actualizar memoria inmediatamente
       localStorage.setItem(STORAGE_KEY,autoId);
       document.getElementById('esperaNombre').textContent=clean(du.nombre||'');
       document.getElementById('esperaWaitBox').style.display='flex';
