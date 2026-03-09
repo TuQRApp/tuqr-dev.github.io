@@ -38,7 +38,7 @@
     .wrap{ max-width:440px; margin:0 auto; }
     .brand{ display:flex; justify-content:center; align-items:center; margin:6px 0 6px; }
     .brand img{
-      width:100%; max-width:440px; height:auto; display:block;
+      width:75%; max-width:330px; height:auto; display:block;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
     }
     .card{
@@ -64,7 +64,7 @@
     p{ margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.45; }
     pre#datos{
       background:#fff; border:1px solid rgba(0,0,0,.10); padding:14px; border-radius:14px; min-height:96px;
-      white-space:pre-wrap; word-break:break-word; font-size:14px; line-height:1.55;
+      white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.55;
       -webkit-text-size-adjust:100%; margin:0 0 12px; font-family: inherit;
       user-select: all; -webkit-user-select: all; cursor:pointer;
     }
@@ -98,15 +98,6 @@
     .field-btn:active{ transform: translateY(1px); filter:brightness(0.99); }
     .field-btn:disabled{ color:#9a9a9a; background:#f2f2f2; border-color:#e9e9e9; box-shadow:none; cursor:not-allowed; }
     .rut-note{ font-size:10px; font-weight:600; color:var(--primary); }
-    .pills{
-      display:flex; gap:8px; margin-top:28px;
-    }
-    .pill{
-      flex:1; display:flex; align-items:center; justify-content:center; gap:5px;
-      background:#fff; border:2px solid rgba(255,212,0,.6); border-radius:999px;
-      padding:4px 8px; font-size:11px; font-weight:700; color:var(--text);
-    }
-    .pill-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0; }
   </style>
 </head>
 
@@ -124,18 +115,19 @@
 
       <pre id="datos" onclick="copiarDatos()">Cargando…</pre>
 
-      <button id="copiar" class="cta" disabled>Copiar datos</button>
+      <button id="copiar" class="cta" disabled>Copiar todos los datos</button>
 
-      <div id="ok"  class="ok">✓ Datos copiados. Ahora abre la app</div>
+      <div id="ok"  class="ok">✓ Copiado al portapapeles</div>
       <div id="err" class="err">No encontramos este comercio</div>
 
-      <div class="pills">
-        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
-        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
-        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+      <div class="or-copy">Si un campo no acepta pegar, usa los botones individuales</div>
+
+      <div id="fields" class="fields" style="display:none;">
+        <button id="copyNombre" class="field-btn" disabled>Nombre</button>
+        <button id="copyRut"    class="field-btn" disabled>RUT <span class="rut-note">(sin puntos)</span></button>
+        <button id="copyNumero" class="field-btn" disabled>N° de cuenta</button>
+        <button id="copyCorreo" class="field-btn" disabled>Correo</button>
       </div>
-
-
     </div>
   </div>
 
@@ -234,7 +226,7 @@ let okTimer = null;
 function showCopied(){
   okEl.style.display = 'block';
   if(okTimer) clearTimeout(okTimer);
-  okTimer = setTimeout(() => { okEl.style.display = 'none'; }, 1800);
+  okTimer = setTimeout(() => { okEl.style.display = 'none'; }, 5000);
 }
 
 function showError(msg){
@@ -308,6 +300,13 @@ async function init(){
       }
     });
 
+    fieldsWrap.style.display = 'grid';
+
+    setupBtn('copyNombre', () => cachedFields.nombre);
+    setupBtn('copyRut',    () => cachedFields.rutCopy);
+    setupBtn('copyNumero', () => cachedFields.numero);
+    setupBtn('copyCorreo', () => cachedFields.correo);
+
     try{
       gtag('event','payer_page_view',{
         merchant_id: id,
@@ -321,7 +320,7 @@ async function init(){
   }
 }
 
-if (!id) { window.location.replace('admin.html'); } else { init(); }
+init();
 </script>
 </body>
 </html>
