@@ -38,7 +38,7 @@
     .wrap{ max-width:440px; margin:0 auto; }
     .brand{ display:flex; justify-content:center; align-items:center; margin:6px 0 6px; }
     .brand img{
-      width:50%; max-width:220px; height:auto; display:block;
+      width:100%; max-width:440px; height:auto; display:block;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
     }
     .card{
@@ -60,11 +60,11 @@
       width:10px; height:10px; border-radius:999px;
       background: var(--accent); box-shadow: 0 0 0 4px rgba(255,212,0,.16);
     }
-    h1{ font-size:20px; line-height:1.15; margin:10px 0 8px; font-weight:400; color:var(--text); letter-spacing:-0.2px; }
+    h1{ font-size:20px; line-height:1.15; margin:10px 0 8px; font-weight:800; color:var(--text); letter-spacing:-0.2px; }
     p{ margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.45; }
     pre#datos{
       background:#fff; border:1px solid rgba(0,0,0,.10); padding:14px; border-radius:14px; min-height:96px;
-      white-space:pre-wrap; word-break:break-word; font-size:17px; line-height:1.55;
+      white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.55;
       -webkit-text-size-adjust:100%; margin:0 0 12px; font-family: inherit;
       user-select: all; -webkit-user-select: all; cursor:pointer;
     }
@@ -111,12 +111,23 @@
       <div class="badge"><span class="dot"></span>Transferencia rápida y sin errores</div>
 
       <h1 id="title">Paga con transferencia</h1>
+      <p>Copia y pega en tu app bancaria</p>
+
       <pre id="datos" onclick="copiarDatos()">Cargando…</pre>
 
       <button id="copiar" class="cta" disabled>Copiar todos los datos</button>
 
       <div id="ok"  class="ok">✓ Copiado al portapapeles</div>
       <div id="err" class="err">No encontramos este comercio</div>
+
+      <div class="or-copy">Si un campo no acepta pegar, usa los botones individuales</div>
+
+      <div id="fields" class="fields" style="display:none;">
+        <button id="copyNombre" class="field-btn" disabled>Nombre</button>
+        <button id="copyRut"    class="field-btn" disabled>RUT <span class="rut-note">(sin puntos)</span></button>
+        <button id="copyNumero" class="field-btn" disabled>N° de cuenta</button>
+        <button id="copyCorreo" class="field-btn" disabled>Correo</button>
+      </div>
     </div>
   </div>
 
@@ -263,7 +274,7 @@ async function init(){
 
     if(!id || !d){ showError('Código inválido'); return; }
 
-    titleEl.textContent = `Paga a: ${sv(d.nombre)}`;
+    titleEl.textContent = `Paga a ${sv(d.nombre)}`;
     document.title      = `${sv(d.nombre)} — TuQR`;
 
     const { textPlain, fields, lines } = buildText(d);
@@ -288,6 +299,13 @@ async function init(){
         alert('Selecciona el texto y cópialo manualmente, o usa los botones de abajo.');
       }
     });
+
+    fieldsWrap.style.display = 'grid';
+
+    setupBtn('copyNombre', () => cachedFields.nombre);
+    setupBtn('copyRut',    () => cachedFields.rutCopy);
+    setupBtn('copyNumero', () => cachedFields.numero);
+    setupBtn('copyCorreo', () => cachedFields.correo);
 
     try{
       gtag('event','payer_page_view',{
