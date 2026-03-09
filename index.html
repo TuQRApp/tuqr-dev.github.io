@@ -106,7 +106,6 @@
       background:#fff; border:2px solid rgba(255,212,0,.6); border-radius:999px;
       padding:4px 8px; font-size:11px; font-weight:700; color:var(--text);
     }
-    .pill-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0; }
   </style>
 </head>
 
@@ -117,8 +116,6 @@
     </div>
 
     <div class="card">
-      <div class="badge"><span class="dot"></span>Transferencia rápida y sin errores</div>
-
       <h1 id="title">Paga con transferencia</h1>
       <p>Copia y pega en tu app bancaria</p>
 
@@ -130,9 +127,9 @@
       <div id="err" class="err">No encontramos este comercio</div>
 
       <div class="pills">
-        <div class="pill"><div class="pill-dot"></div>🔒 Seguro</div>
-        <div class="pill"><div class="pill-dot"></div>⚡ Gratis</div>
-        <div class="pill"><div class="pill-dot"></div>✅ Sin errores</div>
+        <div class="pill">🔒 Seguro</div>
+        <div class="pill">⚡ Gratis</div>
+        <div class="pill">✅ Sin errores</div>
       </div>
 
 
@@ -234,7 +231,7 @@ let okTimer = null;
 function showCopied(){
   okEl.style.display = 'block';
   if(okTimer) clearTimeout(okTimer);
-  okTimer = setTimeout(() => { okEl.style.display = 'none'; }, 1800);
+  okTimer = setTimeout(() => { okEl.style.display = 'none'; }, 5000);
 }
 
 function showError(msg){
