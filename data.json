@@ -7,20 +7,8 @@
     "numeroCuenta": "84845640",
     "correo": "nestragues@gmail.com",
     "telefono": "982897919",
-    "notas": "Prueba sin QR",
-    "created_at": "2026-03-07T21:49:59.027Z",
-    "consent": {
-      "user_id": "digital_1dc1299e-8503-4ffb-8e75-40239e82a937",
-      "policy_version": "PP-2026-03-01-v1",
-      "consent_type": "account_creation",
-      "accepted": true,
-      "accepted_at": "2026-03-07T21:49:58.531Z",
-      "ip_address": null,
-      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/143.0.7499.151 Mobile/15E148 Safari/604.1",
-      "source": "web",
-      "country": "CL",
-      "legal_basis": "consent"
-    }
+    "notas": "",
+    "created_at": "2026-04-16T00:59:36.406Z"
   },
   "bc91c7f8-3353-4127-88bc-b952f1a0facc": {
     "banco": "Mercado Pago",
