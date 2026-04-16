@@ -43,5 +43,28 @@
     "telefono": "982897919",
     "notas": "",
     "created_at": "2026-03-08T23:47:17.452Z"
+  },
+  "393eb1f3-4492-4c23-b23e-c45e54a09bed": {
+    "banco": "Banco Falabella",
+    "rut": "23.182.071-k",
+    "nombre": "Lourdes Estragues",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "878787878787",
+    "correo": "N@mail.com",
+    "telefono": "982897919",
+    "notas": "",
+    "created_at": "2026-04-16T01:23:02.851Z",
+    "consent": {
+      "user_id": "393eb1f3-4492-4c23-b23e-c45e54a09bed",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-04-16T01:23:02.207Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/147.0.7727.47 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
