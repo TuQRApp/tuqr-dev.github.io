@@ -135,5 +135,28 @@
       "country": "CL",
       "legal_basis": "consent"
     }
+  },
+  "75455865-b656-49f0-86da-fada0ad6ad79": {
+    "banco": "Tapp Caja Los Andes",
+    "rut": "21.937.449-6",
+    "nombre": "Elisa Monsalve",
+    "tipoCuenta": "Cuenta Vista",
+    "numeroCuenta": "21937449",
+    "correo": "elisa.monsalve.ossandon@gmail.com",
+    "telefono": "984446095",
+    "notas": "",
+    "created_at": "2026-05-29T23:05:26.945Z",
+    "consent": {
+      "user_id": "75455865-b656-49f0-86da-fada0ad6ad79",
+      "policy_version": "PP-2026-03-01-v1",
+      "consent_type": "account_creation",
+      "accepted": true,
+      "accepted_at": "2026-05-29T23:05:25.893Z",
+      "ip_address": null,
+      "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/148.0.7778.166 Mobile/15E148 Safari/604.1",
+      "source": "web",
+      "country": "CL",
+      "legal_basis": "consent"
+    }
   }
 }
