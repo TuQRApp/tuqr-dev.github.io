@@ -69,8 +69,8 @@
   },
   "8b4e6711-4b63-4ce6-add3-b9d5ae5674e9": {
     "banco": "Mercado Pago",
-    "rut": "21.352.822-k",
-    "nombre": "Amelia Barceló",
+    "rut": "21.352.822-K",
+    "nombre": "Amelia Barcelo",
     "tipoCuenta": "Cuenta Vista",
     "numeroCuenta": "1085139191",
     "correo": "nestragues@icloud.com",
@@ -92,8 +92,8 @@
   },
   "1b26e008-85f5-4687-b93e-4e950158c33d": {
     "banco": "Tapp Caja Los Andes",
-    "rut": "21.352.822-k",
-    "nombre": "Amelia Barceló",
+    "rut": "21.352.822-K",
+    "nombre": "Amelia Barcelo",
     "tipoCuenta": "Cuenta Vista",
     "numeroCuenta": "21352822",
     "correo": "ame.barcelo@gmail.com",
@@ -116,7 +116,7 @@
   "a6f38ad3-1973-4a80-9078-e9736ac01d71": {
     "banco": "Tapp Caja Los Andes",
     "rut": "22.051.387-4",
-    "nombre": "Juan Pablo López",
+    "nombre": "Juan Pablo Lopez",
     "tipoCuenta": "Cuenta Vista",
     "numeroCuenta": "22051387",
     "correo": "juan.pablo.lopez.delgado1@gmail.com",
