@@ -117,24 +117,14 @@
 
     <div class="card">
       <h1 id="title">Paga con transferencia</h1>
-      <p>Copia cada dato y pégalo en el campo de tu banco</p>
+      <p>Copia los datos y pégalos en tu app bancaria</p>
 
       <pre id="datos" onclick="copiarDatos()">Cargando…</pre>
 
-      <button id="copiar" class="cta" disabled>Copiar todos los datos</button>
+      <button id="copiar" class="cta" disabled>Copiar datos</button>
 
       <div id="ok"  class="ok">✓ Copiado. Ahora pégalo en tu app bancaria</div>
       <div id="err" class="err">No encontramos este comercio</div>
-
-      <div class="or-copy">o copia dato por dato (recomendado)</div>
-      <div class="fields" id="fields">
-        <button class="field-btn" id="fNombre" disabled>Copiar nombre</button>
-        <button class="field-btn" id="fRut"    disabled>Copiar RUT</button>
-        <button class="field-btn" id="fBanco"  disabled>Copiar banco</button>
-        <button class="field-btn" id="fTipo"   disabled>Copiar tipo de cuenta</button>
-        <button class="field-btn" id="fNumero" disabled>Copiar N° de cuenta</button>
-        <button class="field-btn" id="fCorreo" disabled>Copiar correo</button>
-      </div>
 
       <div class="pills">
         <div class="pill">🔒 Seguro</div>
@@ -154,7 +144,6 @@ const btn        = document.getElementById('copiar');
 const okEl       = document.getElementById('ok');
 const errEl      = document.getElementById('err');
 const titleEl    = document.getElementById('title');
-const fieldsWrap = document.getElementById('fields');
 
 function clean(s){
   return String(s ?? '')
@@ -228,37 +217,26 @@ function buildText(d){
   };
 }
 
-function copyText(text){
-  const payload = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function'){
-    return navigator.clipboard.writeText(payload)
-      .then(() => true)
-      .catch(() => legacyCopy(payload));
-  }
-  return Promise.resolve(legacyCopy(payload));
-}
-
-function legacyCopy(text){
-  try{
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.setAttribute('readonly', '');
-    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;padding:0;border:0;outline:0;background:transparent;opacity:1;font-size:16px;z-index:9999';
-    document.body.appendChild(ta);
-    ta.focus({ preventScroll: true });
-    ta.select();
-    ta.setSelectionRange(0, ta.value.length);
-    const ok = document.execCommand('copy');
-    document.body.removeChild(ta);
-    if(ok) return true;
-  }catch(_){}
+// Copia el bloque SELECCIONÁNDOLO tal como lo harías a mano. Es idéntico a
+// copiar un mensaje desde WhatsApp: deja en el portapapeles texto multilínea
+// "real", conservando los saltos de línea. Así las apps que separan los datos
+// por línea (Santander, Banco de Chile, MACH…) detectan nombre y banco, y no
+// se va "todo a la primera línea". writeText queda solo como último respaldo.
+function copyBloque(){
   try{
     const range = document.createRange();
     range.selectNodeContents(datosEl);
     const sel = window.getSelection();
-    if(sel){ sel.removeAllRanges(); sel.addRange(range); }
+    sel.removeAllRanges();
+    sel.addRange(range);
+    const ok = document.execCommand && document.execCommand('copy');
+    sel.removeAllRanges();
+    if(ok) return Promise.resolve(true);
   }catch(_){}
-  return false;
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function'){
+    return navigator.clipboard.writeText(cachedText).then(() => true).catch(() => false);
+  }
+  return Promise.resolve(false);
 }
 let okTimer = null;
 function showCopied(){
@@ -272,31 +250,12 @@ function showError(msg){
   errEl.style.display = 'block';
 }
 
-function makeFieldHandler(getVal){
-  return async function(){
-    const val = getVal();
-    if(!val) return;
-    const ok = await copyText(val);
-    if(ok) showCopied();
-    else alert('Mantén presionado el texto y elige "Copiar".');
-  };
-}
-
-function setupBtn(id, getVal){
-  const el = document.getElementById(id);
-  if(!el) return;
-  if(getVal()){
-    el.disabled = false;
-    el.addEventListener('click', makeFieldHandler(getVal));
-  }
-}
-
 let cachedText   = '';
 let cachedFields = null;
 
 async function copiarDatos(){
   if(!cachedText) return;
-  const ok = await copyText(cachedText);
+  const ok = await copyBloque();
   if(ok){
     showCopied();
     try{ gtag('event','copy_click',{ merchant_id: id, source: 'pre_tap' }); }catch(_){}
@@ -321,19 +280,9 @@ async function init(){
 
     datosEl.textContent = lines.join('\n');
 
-    // Botones de copia por campo: cada uno copia SOLO su valor limpio,
-    // sin etiqueta ni salto de línea. Es lo que pega bien en cualquier
-    // banco (Android/iOS), incluido el campo único de la app de Santander.
-    setupBtn('fNombre', () => fields.nombre);
-    setupBtn('fRut',    () => fields.rutCopy);
-    setupBtn('fBanco',  () => fields.banco);
-    setupBtn('fTipo',   () => fields.tipo);
-    setupBtn('fNumero', () => fields.numeroCopy);
-    setupBtn('fCorreo', () => fields.correo);
-
     btn.disabled = false;
     btn.addEventListener('click', async function(){
-      const ok = await copyText(cachedText);
+      const ok = await copyBloque();
       if(ok){
         showCopied();
         try{ gtag('event','copy_click',{ merchant_id: id, source: 'button' }); }catch(_){}
@@ -344,7 +293,7 @@ async function init(){
           const sel = window.getSelection();
           if(sel){ sel.removeAllRanges(); sel.addRange(range); }
         }catch(_){}
-        alert('Selecciona el texto y cópialo manualmente, o usa los botones de abajo.');
+        alert('Mantén presionado el texto de arriba y elige "Copiar".');
       }
     });
 
