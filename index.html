@@ -117,14 +117,24 @@
 
     <div class="card">
       <h1 id="title">Paga con transferencia</h1>
-      <p>Copia y pega en tu app bancaria</p>
+      <p>Copia cada dato y pégalo en el campo de tu banco</p>
 
       <pre id="datos" onclick="copiarDatos()">Cargando…</pre>
 
-      <button id="copiar" class="cta" disabled>Copiar datos</button>
+      <button id="copiar" class="cta" disabled>Copiar todos los datos</button>
 
-      <div id="ok"  class="ok">✓ Copiado. Ahora abre la app de tu banco</div>
+      <div id="ok"  class="ok">✓ Copiado. Ahora pégalo en tu app bancaria</div>
       <div id="err" class="err">No encontramos este comercio</div>
+
+      <div class="or-copy">o copia dato por dato (recomendado)</div>
+      <div class="fields" id="fields">
+        <button class="field-btn" id="fNombre" disabled>Copiar nombre</button>
+        <button class="field-btn" id="fRut"    disabled>Copiar RUT</button>
+        <button class="field-btn" id="fBanco"  disabled>Copiar banco</button>
+        <button class="field-btn" id="fTipo"   disabled>Copiar tipo de cuenta</button>
+        <button class="field-btn" id="fNumero" disabled>Copiar N° de cuenta</button>
+        <button class="field-btn" id="fCorreo" disabled>Copiar correo</button>
+      </div>
 
       <div class="pills">
         <div class="pill">🔒 Seguro</div>
@@ -165,20 +175,43 @@ function formatRut(raw){
   return cuerpo + '-' + r.slice(-1);
 }
 
+// RUT para pegar: SIN puntos, CON guion, DV en mayúscula → 13268177-5 / 24001985-K
+// Es la forma que aceptan sin problemas los campos de RUT de los bancos chilenos.
 function rutParaCopiar(raw){
   return raw.replace(/[\.\s]/g, '').toUpperCase();
 }
 
+// Número de cuenta para pegar: solo dígitos. Evita que un campo numérico del
+// banco rechace el pegado por traer puntos, espacios o guiones.
+function numeroParaCopiar(raw){
+  return String(raw ?? '').replace(/\D/g, '');
+}
+
+// Nombre con mayúscula inicial por palabra (deja conectores en minúscula).
+// Corrige datos cargados en minúscula sin alterar el calce por RUT del banco.
+function titleCaseNombre(s){
+  const min = new Set(['de','del','la','las','los','y','da','do','dos','e','van','von']);
+  return String(s ?? '')
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w, i) => (i > 0 && min.has(w)) ? w : (w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ');
+}
+
 function buildText(d){
-  const nombre     = sv(d.nombre);
+  const nombre     = titleCaseNombre(sv(d.nombre));
   const rutRaw     = sv(d.rut);
-  const rutDisplay = formatRut(rutRaw);
-  const rutCopy    = rutParaCopiar(rutRaw);
+  const rutDisplay = formatRut(rutRaw);   // 13.268.177-5  (legible, para el bloque)
+  const rutCopy    = rutParaCopiar(rutRaw); // 13268177-5  (para pegar por campo)
   const banco      = sv(d.banco);
   const tipo       = sv(d.tipoCuenta);
-  const numero     = sv(d.numeroCuenta);
+  const numero     = sv(d.numeroCuenta);  // como viene (para mostrar)
+  const numeroCopy = numeroParaCopiar(numero); // solo dígitos (para pegar)
   const correo     = d.correo ? sv(d.correo) : '';
 
+  // Bloque completo: formato canónico chileno, idéntico al de WhatsApp.
+  // Saltos de línea \n simples, sin espacios al final ni línea en blanco extra.
   const lines = [
     `Nombre: ${nombre}`,
     `RUT: ${rutDisplay}`,
@@ -190,7 +223,7 @@ function buildText(d){
 
   return {
     textPlain : lines.join('\n'),
-    fields    : { nombre, rutDisplay, rutCopy, banco, tipo, numero, correo },
+    fields    : { nombre, rutDisplay, rutCopy, banco, tipo, numero, numeroCopy, correo },
     lines
   };
 }
@@ -287,6 +320,16 @@ async function init(){
     cachedFields = fields;
 
     datosEl.textContent = lines.join('\n');
+
+    // Botones de copia por campo: cada uno copia SOLO su valor limpio,
+    // sin etiqueta ni salto de línea. Es lo que pega bien en cualquier
+    // banco (Android/iOS), incluido el campo único de la app de Santander.
+    setupBtn('fNombre', () => fields.nombre);
+    setupBtn('fRut',    () => fields.rutCopy);
+    setupBtn('fBanco',  () => fields.banco);
+    setupBtn('fTipo',   () => fields.tipo);
+    setupBtn('fNumero', () => fields.numeroCopy);
+    setupBtn('fCorreo', () => fields.correo);
 
     btn.disabled = false;
     btn.addEventListener('click', async function(){
