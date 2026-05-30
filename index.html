@@ -218,25 +218,39 @@ function buildText(d){
 }
 
 // Copia el bloque SELECCIONÁNDOLO tal como lo harías a mano. Es idéntico a
-// copiar un mensaje desde WhatsApp: deja en el portapapeles texto multilínea
-// "real", conservando los saltos de línea. Así las apps que separan los datos
-// por línea (Santander, Banco de Chile, MACH…) detectan nombre y banco, y no
-// se va "todo a la primera línea". writeText queda solo como último respaldo.
-function copyBloque(){
-  try{
-    const range = document.createRange();
-    range.selectNodeContents(datosEl);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    const ok = document.execCommand && document.execCommand('copy');
-    sel.removeAllRanges();
-    if(ok) return Promise.resolve(true);
-  }catch(_){}
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function'){
-    return navigator.clipboard.writeText(cachedText).then(() => true).catch(() => false);
+// copiar un mensaje desde WhatsApp: deja en el portapapeles SOLO texto plano,
+// sin ninguna versión "enriquecida" (HTML/RTF). Algunas apps con lector de
+// datos (p. ej. Chile) leen esa versión enriquecida y se descuadran el nombre
+// y el banco. Escribir solo text/plain reproduce exactamente lo de WhatsApp.
+async function copyBloque(){
+  // 1) API moderna escribiendo SOLO el flavor text/plain
+  if (navigator.clipboard && window.ClipboardItem){
+    try{
+      const item = new ClipboardItem({
+        'text/plain': new Blob([cachedText], { type: 'text/plain' })
+      });
+      await navigator.clipboard.write([item]);
+      return true;
+    }catch(_){}
   }
-  return Promise.resolve(false);
+  // 2) writeText (también solo texto plano)
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function'){
+    try{ await navigator.clipboard.writeText(cachedText); return true; }catch(_){}
+  }
+  // 3) Último recurso: textarea oculto + execCommand
+  try{
+    const ta = document.createElement('textarea');
+    ta.value = cachedText;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;font-size:16px';
+    document.body.appendChild(ta);
+    ta.focus({ preventScroll: true });
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(_){ return false; }
 }
 let okTimer = null;
 function showCopied(){
